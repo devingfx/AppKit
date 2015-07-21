@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	
+	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+	<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+	<!-- For first- and second-generation iPad: -->
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
+	<!-- For iPhone with high-resolution Retina display running iOS ≤ 6: -->
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+	<!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="apple-touch-icon-120x120-precomposed.png">
+	<!-- For third-generation iPad with high-resolution Retina display: -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
+
+
+	<link rel="stylesheet" href="css/reset.css"/>
+	<link rel="stylesheet" href="css/app.css"/>
+
+	<style>
+	body {
+		font-family: museo, Arial, Helvetica, sans-serif;
+		color: white;
+		-webkit-font-smoothing: antialiased;
+		-moz-font-smoothing: antialiased;
+		-o-font-smoothing: antialiased;
+		font-smooth: auto;
+		font-size: 16px;
+		background-color: #282828;
+	}
+	
+	button {
+		border-radius: 5px;
+		border: 1px solid #999;
+		background: #FEFEFE;
+		background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZlZmVmZSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlMGUwZTAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+		background: -moz-linear-gradient(top, rgba(254, 254, 254, 1) 0%, rgba(224, 224, 224, 1) 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254, 254, 254, 1)), color-stop(100%,rgba(224, 224, 224, 1)));
+		background: -webkit-linear-gradient(top, rgba(254, 254, 254, 1) 0%,rgba(224, 224, 224, 1) 100%);
+		background: -o-linear-gradient(top, rgba(254, 254, 254, 1) 0%,rgba(224, 224, 224, 1) 100%);
+		background: -ms-linear-gradient(top, rgba(254, 254, 254, 1) 0%,rgba(224, 224, 224, 1) 100%);
+		background: linear-gradient(to bottom, rgba(254, 254, 254, 1) 0%, rgba(224, 224, 224, 1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#e0e0e0',GradientType=0 );
+		height: 24px;
+		font-size: 11px;
+		padding: 0 12px;
+	}
+
+	button:active {
+		background: rgb(224,224,224);
+		background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2UwZTBlMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZWZlZmUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+		background: -moz-linear-gradient(top, rgba(224,224,224,1) 0%, rgba(254,254,254,1) 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(224,224,224,1)), color-stop(100%,rgba(254,254,254,1)));
+		background: -webkit-linear-gradient(top, rgba(224,224,224,1) 0%,rgba(254,254,254,1) 100%);
+		background: -o-linear-gradient(top, rgba(224,224,224,1) 0%,rgba(254,254,254,1) 100%);
+		background: -ms-linear-gradient(top, rgba(224,224,224,1) 0%,rgba(254,254,254,1) 100%);
+		background: linear-gradient(to bottom, rgba(224,224,224,1) 0%,rgba(254,254,254,1) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', endColorstr='#fefefe',GradientType=0 );
+	}
+
+
+	#app {
+		background-color: #282828;
+		box-shadow: 5px 0 10px rgba(0,0,0,0.5);
+	}
+
+	#settingsMenu {
+		right: 0;
+		background: #282828;
+	}
+	#settingsMenu.close {
+		-webkit-transform: scale(0.7);
+		opacity: 0;
+	}
+			#settingsMenu li {
+				font: 16px tahoma, arial, helvetica;
+				color:#CCC;
+				text-shadow: 0 2px 0 #000;
+				letter-spacing:1px;
+				border-top: 1px solid #555;
+				border-bottom: 1px solid #222;
+				background-color: #444;
+				/*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(100%, rgba(0, 0, 0, 0.3)), color-stop(00%, transparent)), -webkit-gradient(linear, 50% top, 130% top, color-stop(0%, #444), color-stop(100%, transparent));*/
+				background-repeat: no-repeat;
+				background-position: right;
+				background-size: 100%, 100%, 50%;
+			}
+			#settingsMenu li.title {
+				color: #fff;
+				background-image: -webkit-gradient(linear, left top, left bottom, color-stop(100%, rgba(0, 0, 0, 0.3)), color-stop(00%, transparent));
+			}
+			#settingsMenu li:before {
+				color: #888;
+				font-size: 18px;
+			}
+			#settingsMenu li.enabled:before {
+				color: #F60;
+			}
+
+
+	
+
+	ppm\:Map {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+	}
+	Page { color: black; }
+	#Cats118 {
+		position: absolute;
+		bottom: 0;
+		left:0;
+		width: 100%;
+		height: 80px;
+		/*border: 1px dashed black;*/
+		overflow: hidden;
+	}
+	
+	#itinerary-result-step-container {
+		position: fixed;
+		right: -260px;
+		top: 0;
+		z-index: 1000;
+		width: 250px;
+		height: 100%;
+		background: rgba(255,255,255,0.8);
+		border-left: 1px solid grey;
+		overflow-y: scroll;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		-moz-transition: right 0.5s ease;
+		-webkit-transition: right 0.5s ease;
+	}
+	#itinerary-result-step-container.open {
+		right: 0;
+	}
+	#itinerary-result-step-container-close {
+		position: fixed;
+		right: -20px;
+		top: 5px;
+		cursor: pointer;
+		-moz-transition: right 0.5s ease;
+		-webkit-transition: right 0.5s ease;
+	}
+	#itinerary-result-step-container-close:hover { color: #F60; }
+	#itinerary-result-step-container-close.open {
+		right: 233px;
+		z-index: 1001;
+	}
+
+	.ppm-POIMarker-supermarche {
+		background: green;
+	}
+	.ppm-Control-POIBar { width: 1736px !important; }
+	.ppm-Control-POIBar button { margin-top: 20px; }
+	</style>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="iscroll-lite.js"></script>
+	<script src="app.js"></script>
+	<script src="../DEV/5.0.0/PLANplemouss-Loader-src.js" client="plan"></script>
+
+
+	<script type="text/javascript">
+	
+	var markers,
+			poly,
+			iti,
+			roadbookContainer,
+			polyStyle = {
+				color: '#f60',
+				dashArray: '5',
+				weight: 2,
+				fillColor: '#f60'
+			};
+
+		
+		
+		function logEvent(e) {
+			console.log(e.type);
+		}
+		
+		var pois;
+		function addPOIMarkerGroup(catID)
+		{
+			ppm.modules.POI(function ()
+			{
+				var domain = document.location.hostname.split('.');
+				domain = domain[domain.length - 2];
+				// pois = new ppm.POIMarkerGroup(map.POIManager.POITypes[2]).addTo(map);
+				pois = new ppm.POIMarkerGroup({
+					"id": "2",
+					"title": "Restaurant",
+					"color": "FF0000",
+					"template": '<div class="title" style="white-space:nowrap;">{{=title}}</div> \
+								<div class="activity">{{="Restaurant"}}</div> \
+								<div class="address">{{=address.street}}</div> \
+								<div class="locality">{{=address.zipcode}} {{=address.locality}}</div> \
+								{{tel.length}}<div class="phone">{{=tel.number}}</div>{{/if}} \
+								{{subs}} \
+								<div class="actions"> \
+									<a href="http://r.orange.fr/r?ref={{=ppm.version}}-{{=ppm.options.client}}-'+domain+'_INFOBUL_DETAIL&rand='+ppm.Util.randomString(5)+'&url={{=subs.external_url}}" target="_blank">DÉTAILS</a> \
+									| <a href="#" onCLick="CSContextMenuCollection.ITINERARY_TO.handler({oPoint:new CSPoint({{=longitude}},{{=latitude}})})">ITINÉRAIRE VERS</a> \
+									{{subs.urlBooking}} \
+									 | <a href="{{=subs.urlBooking}}" target="_blank">RÉSERVER</a> \
+									{{/if}} \
+								</div> \
+								{{/if}}',
+					"marker": {
+						"iconUrl": 'marker/pin_00CDFF(40,54)(20,54)(20,54).png',
+						"selectedUrl": 'marker/pin_FF6600(40,54)(20,54)(20,54).png'
+					},
+					"enabling": [
+						{"Zoom": "12,20"},
+						{"Bounds": "-4.967908,42.1411,8.533721,51.2345"},
+						{"Bounds": "8.441039,41.31935,9.635928,43.06462"},
+						{"Bounds": "44.92982,-13.08911,45.32671,-12.57226"},
+						{"Bounds": "55.11964,-21.4431,55.92165,-20.81671"},
+						{"Bounds": "-61.89093,15.77084,-60.94061,16.56749"},
+						{"Bounds": "-61.29218,14.33065,-60.74011,14.94717"},
+						{"Bounds": "-54.56717,1.765565,-51.31522,5.826146"}
+					]
+				}).addTo(map);
+
+			});
+		}
+		
+
+
+
+	
+
+
+	var app = function ()
+	{
+		this.init = this.init.bind(this);
+	}
+	app.prototype = {
+	
+		init: function ()
+		{
+			var _this = this;
+			// Select important nodes
+			this.$el = $('#app');
+			this.$settings = $('#settingsMenu');
+			this.$header = $('header');
+			this.$pageView = $('#pageView');
+			this.$tabbar = $('<div/>');
+			
+			// Create the map
+			this.showMap();
+			
+			// Setup settings menu open / close
+			this.$header.find('img[alt=Options]').bind('click', function()
+			{
+				_this.$el.toggleClass('menuOpen');
+				_this.$settings.toggleClass('close');
+			});
+			// Click anywhere in app to close settings menu
+			this.$el.bind('click', function(e)
+			{
+				if(e.target != _this.$header.find('img[alt=Options]')[0])
+				{
+					_this.$el.removeClass('menuOpen');
+					_this.$settings.addClass('close');
+				}
+			});
+
+			window.addEventListener('resize', this._onResize.bind(this));
+			this._onResize();
+		},
+
+		pages: [],
+		addPage: function(page)
+		{
+			var _this = this;
+			var pageID = this.pages.push(page) - 1;
+			page._$parent = this.$pageView;
+			this.$pageView.append(page.$el.hide());
+
+			// Header title / button
+			page.$title = $('<span class="'+page.id+'">'+page.title+'</span>').appendTo(this.$header.find('div'))
+								.bind('click', function()
+								{
+									// console.log("back >>>", $(this).hasClass('back'));
+									if($(this).hasClass('back'))
+										history.back();
+								});
+			// page.$title.width(page.$title.outerWidth());
+			// TabBar li
+			var $li = $('<li><icon class="'+page.icon+'"/><span>'+page.title+'</span></li>')
+						.bind('click', function()
+						{
+							console.log("navig", _this.pages[pageID].route);
+							if(pageID == 0 && Citypical.app.currentPage == 0)
+								Citypical.getCoordinates();
+							else
+								Citypical.router.navigate(_this.pages[pageID].route , {trigger:true});
+						});
+			page.$button = $li;
+			if(page.includeInTabBar)
+				this.$tabbar.find('ul').append($li);
+		},
+
+		currentPage: null,
+		goToPage: function(pageID)
+		{
+			var _this = this;
+			if(this.pages.length > pageID)
+			{
+				var direction = _this.currentPage <= pageID,
+					//oldPage = this.pages[pageID - 1],
+					page = this.pages[pageID]/*,
+					left = {transform:"translateX(-185px)"},
+					center = {transform:"translateX(0px)", width: 200},
+					right = {transform:"translateX(185px)"}*/;
+
+				page.show(direction ? 1 : -1);
+				
+				this.updateHeaderLayout(pageID);
+
+				_this.currentPage = pageID;
+			}
+		},
+
+		showMap: function ()
+		{
+			var _this = this;
+			ppm.modules.Core(function()
+			{
+				// window.map = new ppm.Map(document.querySelector('ppm\\.Core\\:Map'), {
+				var map = _this.map = new ppm.Map(document.querySelector('ppm\\:Map'), {
+					center: [43.609, 7.018],
+					zoom: 16,
+					showControls: false,
+					mapStyleControl: false,
+					enablePOIs: true,
+					showPOIBar: true,
+					POIBarOptions: {
+						position: 'Cats118',
+						layoutMethod: 'left',
+						buttonsDropInPanel: false
+					}
+				})
+					// .setView([43.609,7.018], 16,{reset: true})
+					// .addLayer(bing);
+				
+				// document.getElementById('Cats118').addEventListener()
+				if(map.options.showPOIBar)
+					map.on('POITypesLoaded', function ()
+					{
+						window.tg = new iScroll(document.getElementById('Cats118'), {hScroll: true, vScroll: false});
+
+					});
+
+				_this.markers = new ppm.FeatureGroup();
+				// markers = new ppm.MarkerClusterGroup({ animateAddingMarkers : true });
+				map.addLayer(_this.markers);
+
+				// map.on('movestart', logEvent);
+				// map.on('move', logEvent);
+				// map.on('moveend', logEvent);
+				// map.on('zoomstart', logEvent);
+				// map.on('zoomend', logEvent);
+
+				// var pageStyle = {
+				// 		border: '1px dashed black',
+				// 		position: 'relative',
+				// 		height: '300px'
+				// 	},
+				// 	fullStyle = {
+				// 		border: 'none',
+				// 		position: 'absolute',
+				// 		top: 0,
+				// 		left: 0,
+				// 		width: '100%',
+				// 		height: '100%'
+				// 	};
+
+				// ppm.DomUtil.get('modePage').onclick = function(e)
+				// {
+				// 	var isFull = map._container.style.position == 'absolute';
+				// 	ppm.extend(map._container.style, isFull ? pageStyle : fullStyle);
+					
+				// 	map.invalidateSize();
+
+				// 	ppm.DomUtil.get('modePage').innerHTML = !isFull ? 'Page mode' : 'Fullscreen';
+					
+				// 	// ppm.DomUtil.get('map').style.display = 'none';
+
+				// 	// window.map = new ppm.Map(document.querySelector('.ppm-Map'), {
+				// 	// 	center: [43.609, 7.018],
+				// 	// 	zoom: 16,
+				// 	// 	showControls: true,
+				// 	// 	mapStyleControl: true
+				// 	// })
+				// };
+
+				// Polyfill classList
+				_this.roadbookContainer = ppm.DomUtil.get('itinerary-result-step-container');
+				// _this.roadbookContainer.classList = new ppm.TokenList(_this.roadbookContainer);
+				
+				_this.closeBtn = ppm.DomUtil.get('itinerary-result-step-container-close');
+				// _this.closeBtn.classList = new ppm.TokenList(_this.closeBtn);
+
+
+
+
+				// ppm.DomUtil.get('modePage').onmousemove = function(e)
+				// {
+				// 	console.log(e.clientX, e.clientY);
+				// };
+				
+			});
+		},
+
+		populate: function ()
+		{
+			console.log("azeazeza");
+			var  _this = this;
+			if(!ppm.Infobox.hasTemplate('Markerial'))
+				ppm.Infobox.registerTemplate('Markerial', 'Marker&nbsp;{{=id}}!');
+			for (var i = 0; i < 10; i++)
+			{
+				(function(i)
+				{
+					var marker,
+					    pos = app.getRandomLatLng(_this.map);
+					
+					app.markers.addLayer(marker = new ppm.Marker(pos, {
+						/*icon: new ppm.DivIcon({
+							iconSize: ppm.point(40, 56),
+							iconAnchor: ppm.point(20, 20),
+							className: '',
+							html: '<div style="width: 40px; height: 56px; overflow: hidden; background: transparent; border: none;"> \
+										<img src="http://maps.118712.fr/I/CSCarto_v4.1/Release_4_1_3/POIBar/sprite_pin.png"/> \
+									</div>'
+						}),*/
+						title: "Marker num: " + i,
+						draggable: true,
+						infoboxData: {
+							templateName: 'Markerial', 
+							data: {id: i},
+							side: 'top',
+							offset: new ppm.Point(0, -20),
+							map: app.map, 
+							anchor: pos,
+							animateMove: true
+						}
+					}));
+					
+				})(i);
+			}
+			return false;
+		},
+
+		addPoly: function ()
+		{
+			ppm.modules.Drawing(function()
+			{
+				app.map.addLayer(poly = new ppm.Polygon([
+					[43.609,7.018],
+					[43.609,7.017],
+					[43.608,7.017],
+					[43.608,7.018]
+				]));
+
+				new ppm.Rectangle(app.map.getBounds()).addTo(app.map);
+			});
+		},
+
+		newIti: function(e)
+		{
+			ppm.modules.Itinerary(function()
+			{
+				iti = new ppm.Itinerary({
+					waypoints: [
+						[43.61113,7.01721],
+						[43.62570,7.0466]
+					],
+					draggable: true
+					
+				});
+				iti.addTo(app.map);
+				iti.calculate();
+
+				iti.on('roadbookLoaded', this._onRoadbookLoaded.bind(this));
+			});
+		},
+
+		getRandomLatLng: function (map)
+		{
+			var bounds = map.getBounds(),
+				southWest = bounds.getSouthWest(),
+				northEast = bounds.getNorthEast(),
+				lngSpan = northEast.lng - southWest.lng,
+				latSpan = northEast.lat - southWest.lat;
+
+			return new ppm.LatLng(
+					southWest.lat + latSpan * Math.random(),
+			        southWest.lng + lngSpan * Math.random());
+		},
+
+		_onResize: function ()
+		{
+			// Fix body sizes
+			$('body').add(this.$el).css({width: window.innerWidth, height: window.innerHeight});
+			this.$el.css({width: window.innerWidth, height: window.innerHeight});
+			
+			// Fix page view height and top
+			this.$pageView.height(this.$el.height() - this.$header.outerHeight() - this.$tabbar.outerHeight())
+							.css("top", this.$header.outerHeight());
+			
+			// Fix tabBar buttons width
+			this.$tabbar.find('li').width(this.$tabbar.width() / $('#tabbar').find('li').length);
+
+			// this.updateHeaderLayout();
+			this.map && this.map.POIBar && this.map.POIBar._updateDisplayList();
+		},
+
+		_onRoadbookLoaded: function()
+		{
+			this.roadbookContainer.classList.add('open');
+			this.closeBtn.classList.add('open');
+			iti.displayRoadbook('itinerary-result-step-container', '{{{var idx = 1}}} \
+			                    									{{{var idx_s = 0}}} \
+			                    									<table id="itinerary-result-step-box"> \
+																	    <tr> \
+																	        <td class="icon"><div class="flag start"></div></td> \
+																	        <td class="instruction main-step">{=aViaName[0]}}</td> \
+																	    </tr> \
+																	    {{@routeLegs}} \
+																	        {{{ var route = _val}}} \
+																	        {{@route.itineraryItems}} \
+																	            {{{ var step = _val}}} \
+																	            <tr onmouseover="iti._stepsGroup.getLayer( {{=step._step_id}} ).showInfobox();" onmouseout="iti._stepsGroup.getLayer( {{=step._step_id}} ).hideInfobox();"> \
+																	                <td class="icon"><div class="itinerary-direction32 {{=step.instruction.maneuverType}}"></div></td> \
+																	                <td>\
+																	                    <div class="instruction"><span class="step-number{{idx > 99}} wide{{/if}}">{{=idx++}}</span> {{=step.instruction.text}}</div> \
+																	                    <div id="distance-separator"></div> \
+																	                    {{step.travelDistance < 1}} \
+																	                        <div class="distance">{{=step.travelDistance * 1000}} m</div> \
+																	                    {{:else}} \
+																	                        <div class="distance">{{=Math.round(step.travelDistance)}} km</div> \
+																	                    {{/if}} \
+																	                </td> \
+																	            </tr> \
+																	        {{/@route.itineraryItems}} \
+																	        {{route_index <= routeLegs.length-2}} \
+																	            <tr> \
+																	                <td class="icon"><div class="flag waypoint"></div></td> \
+																	                <td class="instruction main-step">{=aViaName[route_index]}}</td> \
+																	            </tr> \
+																	        {{/if}} \
+																	    {{/@routeLegs}} \
+																	    <tr> \
+																	        <td class="icon"><div class="flag end"></div></td> \
+																	        <td class="instruction main-step">{=aViaName[aViaName.length - 1]}}</td> \
+																	    </tr> \
+																	</table>');
+		}
+	};
+	// app = new app();
+	</script>
+	
+
+	
+	<script type="text/javascript">
+	$(function ()
+	{
+		$('Page').applyClass(Page);
+		$('PageView').applyClass(PageView)[0].goToPage(0);
+		$('#app').applyClass(WebApp);
+	});
+	</script>
+</head>
+
+<body>
+	<Menu id="settingsMenu" class="close">
+		<ul>
+			<li class="title">PLANplemouss zests</li>
+			<!-- <li onclick="app.showMap()">Load Core</li> -->
+			<li onclick="app.populate()">Populate with 10 markers</li>
+			<li onclick="app.addPoly()">Draw rectangles</li>
+			<li onclick="app.newIti()">New Itinerary</li>
+			<!-- <li onclick="addPOIMarkerGroup(17)">Add POIS</li> -->
+			<li id="modePage">Fullscreen</li>
+		</ul>
+	</Menu>
+	<WebApp id="app">
+		<header>
+			<div></div>
+			<img src="./img/theme2/prefs.png" alt="Options" title="Options"/>
+		</header>
+		<PageView>
+			<Page>
+				<ppm:Map id="map"></ppm:Map>
+				<div id="Cats118"></div>
+				<div id="itinerary-result-step-container"></div>
+				<div id="itinerary-result-step-container-close" class="icon-close"
+					 onClick="this.classList.remove('open'); roadbookContainer.classList.remove('open');">
+				</div>
+			</Page>
+			<Page>
+				Hello
+			</Page>
+		</PageView>
+	</WebApp>
+</body>
+
+</html>
