@@ -1,0 +1,255 @@
+
+body {
+	background: #CCC;
+}
+WebApp {  }
+
+
+Menu {
+	background: #CCC;
+}
+Menu.close {
+}
+	Menu header {
+		height: 50px;
+		padding: 8px;
+		/*border-top: 1px solid #908E8F;
+		border-bottom: 1px solid #171717;*/
+		background-color: grey;
+	}
+		Menu header h2 {
+			line-height: 40px;
+			margin-left: 10px;
+		}
+	Menu ul {  }
+		Menu li {
+			padding: 10px 20px;
+			font-weight: bold;
+			height: 50px;
+			font-size: 18px;
+		}
+		.desktop Menu li {
+			height: 30px;
+			font-size: 14px;
+			line-height: 10px;
+			line-height: 28px;
+		}
+		Menu li:hover, Menu li:active {
+			background: rgba(255,255,255,0.5);
+		}
+		
+		header h2:active { background: red }
+		
+		Menu li.title {
+			font-size: 20px;
+			padding: 4px 10px;
+			color: #fff;
+			height: 30px;
+			background: #ADADAD;
+		}
+		Menu li:before {
+			font-family: 'icomoon';
+			content: attr(icon);
+			speak: none;
+			font-weight: normal;
+			font-variant: normal;
+			text-transform: none;
+			line-height: 1;
+			-webkit-font-smoothing: antialiased;
+			right: 10px;
+			font-size: 18px;
+			position: absolute;
+		}
+		Menu li.enabled:before {
+			color: #F60;
+		}
+
+		Menu input {
+			width: initial;
+		}
+
+#loading {
+	position: absolute;
+    top: 26px;
+    z-index: 10;
+    right: 56px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 10px solid white;
+    margin: -35px -35px;
+    border-top-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 1);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    -webkit-transition: all 1s linear;
+    -webkit-transform: rotate(1000deg) scale(0.3);
+}
+
+@-webkit-keyframes loading
+{
+	from {
+		background-position: 0 1px, 0px 0;
+	}
+	to {
+		background-position: 0 1px, 64px 0;
+	}
+}
+
+body.loading header {
+	background-repeat: repeat-x;
+	-webkit-animation: loading 2s linear infinite;
+	background-image: 	url('http://c.woopic.com/Divertissement/icons/A/headLite.png'), 
+						url('../img/theme2/black-white-stripes-pattern-30.png');
+}
+/******************************************************************************
+ *  Header
+ *****************************************************************************/
+
+WebApp > header {
+	height: 50px;
+	padding: 8px;
+	/*border-top: 1px solid #908E8F;
+	border-bottom: 1px solid #171717;*/
+	background-color: grey;
+}
+	WebApp > header .title {
+		line-height: 40px;
+		margin-left: 10px;
+	}
+	
+	WebApp > header .icon {
+		width: 35px;
+	}
+
+
+PageView {
+	top: 50px;
+}
+	Page {
+		background-color: white;
+	}
+
+
+
+
+
+
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('../img/theme2/icomoon229887/fonts/icomoon2.eot');
+	src:url('../img/theme2/icomoon229887/fonts/icomoon2.eot?#iefix') format('embedded-opentype'),
+		url('../img/theme2/icomoon229887/fonts/icomoon2.woff') format('woff'),
+		url('../img/theme2/icomoon229887/fonts/icomoon2.ttf') format('truetype'),
+		url('../img/theme2/icomoon229887/fonts/icomoon2.svg#icomoon2') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[icon]:before {
+	font-family: 'icomoon';
+	content: attr(icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	margin-left: -30px;
+	font-size: 18px;
+	position: absolute;
+}
+
+
+
+#tabbar {
+	background: #222 url('http://c.woopic.com/Divertissement/icons/A/headLite.png') no-repeat 0 1px;
+	box-shadow: 0 -5px 10px rgba(0,0,0,0.5);
+	height: 70px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	overflow: hidden;
+}
+	#tabbar ul {
+		margin: 0;
+		padding: 0;
+	}
+		#tabbar li {
+			display: block;
+			float: left;
+			text-align: center;
+		}
+			#tabbar li icon {
+				width: 50px;
+				height: 50px;
+				display: block;
+				background-size: 100%;
+				margin: auto;
+			}
+				#tabbar li icon.map { background-image: url(../img/theme2/map.png); }
+				#tabbar li icon.events { background-image: url(../img/theme2/events.png); }
+				#tabbar li icon.messages { background-image: url(../img/theme2/messages.png); }
+			#tabbar li span {
+				display: block;
+				text-shadow: 0 2px 0 #000;
+				margin-top: -3px;
+			}
+		#tabbar li.disabled {
+			pointer-events: none;
+			opacity: 0.3;
+		}
+
+
+
+
+
+Menu input[type=text] {
+	width: 150px;
+	font-weight: normal;
+	background: none;
+	border: none;
+	outline: none;
+	padding: 3px 5px;
+	position: relative;
+	border-bottom: 1px solid;
+}
+/*
+	input[type=text]:after {
+		content: "";
+		display: block;
+		position: absolute;
+		border: 2px solid #F60;
+		border-top: none;
+		height: 4px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+textarea {
+	background-color: transparent;
+	border: 0px solid transparent;
+	outline: none;
+	color: white;
+	border-left: 1px solid #F60;
+	border-bottom: 2px solid #F60;
+	margin: 10px 0;
+}
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

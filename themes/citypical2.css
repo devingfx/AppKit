@@ -1,0 +1,190 @@
+html {
+	overflow: hidden;
+}
+body {
+	overflow: hidden;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	font-family: museo, Arial, Helvetica, sans-serif;
+	color: white;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
+	font-smooth: auto;
+	font-size: 16px;
+	background-color: #5E5E5E;
+	margin: 0px;
+}
+
+#app {
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	background-color: #5E5E5E;
+	box-shadow: 5px 0 10px rgba(0,0,0,0.5);
+	-webkit-transition: -webkit-transform 0.3s ease-out;
+}
+#app.menuOpen {
+	-webkit-transform: translateX(-75%);
+}
+
+#menu {
+	position: absolute;
+	width: 75%;
+	height: 100%;
+	right: 0;
+	overflow-y: scroll;
+	background: rgba(255, 102, 0, 0.5);
+}
+
+/******************************************************************************
+ *  Header
+ *****************************************************************************/
+
+header {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	/*height: 50px;*/
+	z-index: 10;
+	/*padding: 0px;*/
+	color: white;
+	padding: 8px;
+	height: 50px;
+	box-sizing: border-box;
+	/*border-top: 1px solid #908E8F;
+	border-bottom: 1px solid #171717;*/
+	background: #888 url('http://c.woopic.com/Divertissement/icons/A/headLite.png') no-repeat 0 1px;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+}
+	header span {
+		color: white;
+		font-size: 24px;
+		font-weight: bold;
+		text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+		line-height: 34px;
+		vertical-align: top;
+		margin-left: 10px;
+	}
+	header span.back:before {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 20px;
+		left: 0px;
+		width: 0px;
+		height: 0px;
+		border: 5px solid transparent;
+		border-left: 5px solid #f60;
+		-webkit-transform: rotate(180deg);
+		-moz-transform: rotate(180deg);
+	}
+	/*header.desktop span {
+		color: white;
+		font-size: 30px;
+		font-weight: bold;
+		text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+		line-height: 56px;
+		vertical-align: top;
+		margin-left: 30px;
+	}*/
+	header img {
+		width: 35px;
+		/*height: 32px;*/
+		/*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);*/
+		float:	right;
+	}
+
+
+#pageView {
+	width: 100%;
+	/*height: 100%;*/
+	position: absolute;
+	top: 50px;
+	overflow: hidden;
+}
+	.page {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		overflow-y: scroll;
+		background-color: #5E5E5E;
+		-webkit-transform: translateX(0);
+		-webkit-transition: -webkit-transform 0.3s ease-out;
+	}
+
+
+
+
+
+
+
+
+
+
+.feed {
+	width: 100%;
+	display: block;
+	min-height: 4px;
+	font: 16px tahoma, arial, helvetica;
+	color:#fff;
+	text-shadow: 0 2px 0 #000;
+	letter-spacing:1px;
+	border-bottom: 1px solid;
+	padding: 15px 20px 15px 10px;
+	border-color: black;
+	font-weight: bold;
+	box-sizing: border-box;
+	
+}
+.feed.even {
+	background: #444;	
+}
+
+.feed.odd {
+	
+}
+
+.date {
+	font-style: italic;
+	font-weight: normal;
+}
+
+#tabbar {
+	background: #222 url('http://c.woopic.com/Divertissement/icons/A/headLite.png') no-repeat 0 1px;
+	box-shadow: 0 -5px 10px rgba(0,0,0,0.5);
+	height: 70px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+}
+	#tabbar ul {
+		margin: 0;
+		padding: 0;
+	}
+		#tabbar li {
+			display: block;
+			float: left;
+			text-align: center;
+		}
+			#tabbar li icon {
+				width: 50px;
+				height: 50px;
+				display: block;
+				background-size: 100%;
+				margin: auto;
+			}
+				#tabbar li icon.map { background-image: url(../img/theme2/map.png); }
+				#tabbar li icon.events { background-image: url(../img/theme2/events.png); }
+				#tabbar li icon.messages { background-image: url(../img/theme2/messages.png); }
+			#tabbar li span {
+				display: block;
+				text-shadow: 0 2px 0 #000;
+				margin-top: -3px;
+			}
+		#tabbar li.disabled {
+			pointer-events: none;
+			opacity: 0.3;
+		}
