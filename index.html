@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>PLANplemoussssss</title>
+	<title>AppKit scafolder</title>
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -32,7 +32,7 @@
 	<link rel="stylesheet" href="./themes/Pixel.css" />
 	<link rel="stylesheet" href="./img/pixelmoon/style.css" />
 	-->
-	<link rel="stylesheet" href="./themes/CartaGen.css" />
+	<link rel="stylesheet" href="./themes/Minimal.css" />
 	
 	<style>
 		#info {
@@ -57,7 +57,7 @@
 	<script src="app.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	-->
-	<script src="./js/jquery-2.0.3.min.js"></script>
+	<script src="./libs/jquery-2.0.3.min.js"></script>
 	
 	<script src="./js/AppKit.js" responsizes="[400,640,800]" manifest="{'#app':WebApp, 'Page': Page, 'PageView':PageView, 'Menu':Menu }">
 	{
@@ -73,6 +73,8 @@
 	<!--script src="./CartaGen.js"></script-->
 	
 	<style>
+	.icon { font-size: 34px; }
+	
 	Page {
 		padding: 0px;
 		overflow: hidden;
@@ -224,34 +226,20 @@
 		</script>
 		
 		<header>
-			<img class="icon" width="64" src="./img/PLANplemouss.Logo64.png" title="PLANplemouss" 
-				 onClick="app.toggleMenu($('#levelMenu'))"/>
+			<span class="icon icon-layout"  title="Menu" 
+				  onClick="app.toggleMenu($('#levelMenu'))"></span>
 			
-			<h1 class="title">PLANplemouss<span id="testName"></span></h1>
+			<h1 class="title">AppKit - demo<span id="testName"></span></h1>
 			
 			<span class="version" onClick="window.close()">version: 5.0.7</span>
-			<span class="icon-cancel3" onClick="window.close()" style="
-    position: absolute;
-    right: 13px;
-    top: 11px;
-    font-size: 24px;
-"></span>
+			<span class="icon-cancel3" onClick="window.close()" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>
 			
 		</header>
 
 		<PageView selectedIndex="0">
 			
 			<Page style="background: #FFF;">
-			
-				<img class="icon" width="64" src="./img/PLANplemouss.Logo64.png" title="PLANplemouss" 
-					 onClick="app.toggleMenu($('#levelMenu'))"/>
-				
-				<img class="icon" width="64" src="./img/PLANplemouss.Logo64.png" title="PLANplemouss" 
-					 onClick="app.toggleMenu($('#settingsMenu'))"/>
-				
-				<img class="icon" width="64" src="./img/PLANplemouss.Logo64.png" title="PLANplemouss" 
-					 onClick="app.toggleMenu($('#nestedMenu'))"/>
-					 
+				Page 0
 			</Page>
 			
 		</PageView>
