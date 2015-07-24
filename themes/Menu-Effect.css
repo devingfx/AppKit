@@ -1,0 +1,32 @@
+
+/* Soft 3D efect */
+
+.theme-soft3D Menu[side=left].close {
+	transform: translate(-100% rotate3d(0, 1, 0, -20deg));
+	-o-transform: translate(-100% rotate3d(0, 1, 0, -20deg));
+	-ms-transform: translate(-100%) rotate3d(0, 1, 0, -20deg);
+	-moz-transform: translate(-100%) rotate3d(0, 1, 0, -20deg);
+	-webkit-transform: translate(-100%) rotate3d(0, 1, 0, -20deg);
+}
+.theme-soft3D Menu[side=right].close {
+	transform: translate(100% rotate3d(0, 1, 0, 20deg));
+	-o-transform: translate(100% rotate3d(0, 1, 0, 20deg));
+	-ms-transform: translate(100%) rotate3d(0, 1, 0, 20deg);
+	-moz-transform: translate(100%) rotate3d(0, 1, 0, 20deg);
+	-webkit-transform: translate(100%) rotate3d(0, 1, 0, 20deg);
+}
+
+.theme-soft3D WebApp.leftMenuOpen {
+    transform: translateX(66%) rotate3d(0,1,0,20deg) scale(0.92);
+    -o-transform: translateX(66%) rotate3d(0,1,0,20deg) scale(0.92);
+    -ms-transform: translateX(66%) rotate3d(0,1,0,20deg) scale(0.92);
+    -moz-transform: translateX(66%) rotate3d(0,1,0,20deg) scale(0.92);
+    -webkit-transform: translateX(66%) rotate3d(0,1,0,20deg) scale(0.92);
+}
+.theme-soft3D WebApp.rightMenuOpen {
+    transform: translateX(-66%) rotate3d(0,1,0,-20deg) scale(0.92);
+    -o-transform: translateX(-66%) rotate3d(0,1,0,-20deg) scale(0.92);
+    -ms-transform: translateX(-66%) rotate3d(0,1,0,-20deg) scale(0.92);
+    -moz-transform: translateX(-66%) rotate3d(0,1,0,-20deg) scale(0.92);
+    -webkit-transform: translateX(-66%) rotate3d(0,1,0,-20deg) scale(0.92);
+}
