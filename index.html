@@ -19,99 +19,92 @@
 	<!-- For third-generation iPad with high-resolution Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
 	
-	<!--[if lte IE 8]><link rel="stylesheet" href="../../dist/leaflet.ie.css" /><![endif]-->
+	
 	<link rel="stylesheet" href="./css/reset.css"/>
 	<link rel="stylesheet" href="./css/app.css"/>
 	<link rel="stylesheet" href="./img/appkit-icons/style.css" />
-	<!--link rel="stylesheet" href="./themes/OpenSans.css"/-->
-	<!--link rel="stylesheet" href="./app/css/app.css" /-->
-	<!--
+	<!--<link rel="stylesheet" href="./themes/OpenSans.css"/>-->
+	<!--<link rel="stylesheet" href="./app/css/app.css" />-->
+	
+	<!--<link rel="stylesheet" href="./themes/citypical.css" />-->
+	<!--<link rel="stylesheet" href="./themes/citypical2.css" />-->
 	<link rel="stylesheet" href="./themes/Minimal.css" />
-	<link rel="stylesheet" href="./themes/Blacktics.css" />
+	<!--<link rel="stylesheet" href="./themes/Blacktics.css" />-->
+	<!--<link rel="stylesheet" href="./themes/Cartagen.css" />-->
+	<!--<link rel="stylesheet" href="./themes/Menu-Effect.css" />-->
 	
-	<link rel="stylesheet" href="./themes/Pixel.css" />
-	<link rel="stylesheet" href="./img/pixelmoon/style.css" />
-	-->
-	<link rel="stylesheet" href="./themes/Minimal.css" />
-	
-	<style>
-		#info {
-			position: absolute;
-			top: 0px; width: 100%;
-			color: #ffffff;
-			padding: 5px;
-			font-family: Monospace;
-			font-size: 13px;
-			text-align: center;
-			z-index:100;
-		}
-
-		
-		a { color:red }
-		#levels { position: absolute; }
-	</style>
+	<!--<link rel="stylesheet" href="./themes/Pixel.css" />-->
+	<!--<link rel="stylesheet" href="./img/pixelmoon/style.css" />-->
 	
 	
 	
-	<!--
-	<script src="app.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	-->
+	<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
 	<script src="./libs/jquery-2.0.3.min.js"></script>
 	
-	<script src="./js/AppKit.js" responsizes="[400,640,800]" manifest="{'#app':WebApp, 'Page': Page, 'PageView':PageView, 'Menu':Menu }">
+	<script src="./js/console.emit.js" keep="true"
+	    	level="hello instance initialize event THREEElement NodeClass WebApp Page PageView Menu Jilex"></script>
+	<link rel="stylesheet" href="./css/console.css" />
+
+	<script src="./js/AppKit/Class.js"></script>
+	<script src="./js/AppKit/EventDispatcher.js"></script>
+	<script src="./js/AppKit/NodeClass.js"></script>
+	<script src="./js/AppKit/WebApp.js"></script>
+	<script src="./js/AppKit/PageView.js"></script>
+	<script src="./js/AppKit/Page.js"></script>
+	<script src="./js/AppKit/Menu.js"></script>
+	<script src="./js/AppKit.js" responsizes="{[400,640,800]}" debug="hello instance initialize event">
 	{
-		'.version': cg.VersionInfo,
 		'#app': WebApp,
 		'Page': Page,
 		'PageView': PageView,
-		'Menu': Menu
+		'Menu': Menu,
 	}
 	</script>
-	<script src="./js/iscroll-lite.js"></script>
+	
+	<script src="./libs/iscroll-lite.js"></script>
 	<script src="./js/bindings.js"></script>
-	<!--script src="./CartaGen.js"></script-->
+	
 	
 	<style>
-	.icon { font-size: 34px; }
-	
-	Page {
-		padding: 0px;
-		overflow: hidden;
-	}
-	@media  (min-width: 800px) {
+		.icon { font-size: 34px; }
 		
-		Menu { width: 25%; }
-		Menu.close {
-			width: 25%;
-			transform: translate(0);
-			-o-transform: translate(0);
-			-ms-transform: translate(0);
-			-moz-transform: translate(0);
-			-webkit-transform: translate(0);
+		Page {
+			padding: 0px;
+			overflow: hidden;
 		}
-		WebApp {
-			width: 75%;
-			right: 0;
-		}
-			WebApp.leftMenuOpen, WebApp.rightMenuOpen {
-				transform: translateX(0);
-				-ms-transform: translateX(0);
-				-webkit-transform: translateX(0);
+		@media  (min-width: 800px) {
+			
+			Menu { width: 25%; }
+			Menu.close {
+				width: 25%;
+				transform: translate(0);
+				-o-transform: translate(0);
+				-ms-transform: translate(0);
+				-moz-transform: translate(0);
+				-webkit-transform: translate(0);
 			}
-				WebApp.leftMenuOpen:after, WebApp.rightMenuOpen:after {
-					pointer-events: none;
-					opacity: 0;
+			WebApp {
+				width: 75%;
+				right: 0;
+			}
+				WebApp.leftMenuOpen, WebApp.rightMenuOpen {
+					transform: translateX(0);
+					-ms-transform: translateX(0);
+					-webkit-transform: translateX(0);
 				}
-	 
-	}
-	
-	.version {
-		color: white;
-		float: right;
-		padding-right: 40px;
-		-webkit-app-region: no-drag;
-	}
+					WebApp.leftMenuOpen:after, WebApp.rightMenuOpen:after {
+						pointer-events: none;
+						opacity: 0;
+					}
+		 
+		}
+		
+		.version {
+			color: white;
+			float: right;
+			padding-right: 40px;
+			-webkit-app-region: no-drag;
+		}
 	</style>
 
 </head>
