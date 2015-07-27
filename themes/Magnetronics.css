@@ -1,0 +1,96 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/DXI1ORHCpsQm3Vp6mXoaTYnF5uFdDttMLvmWuJdhhgs.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/cJZKeOuBrn4kERxqtaUH3aCWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/k3k702ZOKiLJc3WVjuplzInF5uFdDttMLvmWuJdhhgs.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Open Sans Light Italic'), local('OpenSansLight-Italic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/PRmiXeptR36kaC0GEAetxrfB31yxOzP-czbf6AAKCVo.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/xjAJXh38I15wypJXxuGMBp0EAVxt0G0biEntp43Qt6E.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/PRmiXeptR36kaC0GEAetxp_TkvowlIOtbR7ePgFOpF4.ttf) format('truetype');
+}
+
+
+* {
+	/* font-family: 'Open Sans', sans-serif; */
+}
+
+body {
+	font: 12px/1.4 'Open Sans', Verdana, sans-serif;
+}
+
+h1, h2 { font-weight: 300; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); }
+h1 { color: #DA5700; font-size: 32px; }
+h2 { color: #F60; }
+h3, h4, h5, h6 { color: #DA5700; }
+
+
+WebApp {
+	box-shadow: 0 0 30px rgba(0,0,0,0.3);
+}
+WebApp > header, Menu > header {
+	color: #FFF;
+	height: 50px;
+	padding: 0px 10px;
+	line-height: 45px;
+	
+	background: #4898ac;
+	border-bottom: 5px solid #326a78;
+	color: white;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+	WebApp > header .title, Menu > header h2 {
+		color: #FFF;
+		margin-left: 10px;
+	
+		line-height: 46px;
+		font-weight: 100;
+}
+	WebApp > header .icon {
+    margin-top: 4px;
+		
+	}
+
+Menu li {
+	padding: 10px 20px;
+	/* font-weight: bold; */
+	height: 50px;
+	font-size: 18px;
+}
+	Menu li.title {
+		height: 30px;
+		font-size: 16px;
+		line-height: 12px;
+		background: #4898AC;
+		border-bottom: 2px solid #326A78;
+		color: white;
+		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+	}
+	Menu li:hover, Menu li:active {
+		color: #4898ac;
+	}

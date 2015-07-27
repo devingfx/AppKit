@@ -26,15 +26,16 @@
 	<!--<link rel="stylesheet" href="./themes/OpenSans.css"/>-->
 	<!--<link rel="stylesheet" href="./app/css/app.css" />-->
 	
-	<!--<link rel="stylesheet" href="./themes/citypical.css" />-->
-	<!--<link rel="stylesheet" href="./themes/citypical2.css" />-->
-	<link rel="stylesheet" href="./themes/Minimal.css" />
-	<!--<link rel="stylesheet" href="./themes/Blacktics.css" />-->
-	<!--<link rel="stylesheet" href="./themes/Cartagen.css" />-->
-	<!--<link rel="stylesheet" href="./themes/Menu-Effect.css" />-->
+	<link rel="stylesheet" href="./themes/citypical.css" disabled/>
+	<link rel="stylesheet" href="./themes/citypical2.css" disabled/>
+	<link rel="stylesheet" href="./themes/Minimal.css" disabled/>
+	<link rel="stylesheet" href="./themes/Blackstic.css" disabled/>
+	<link rel="stylesheet" href="./themes/CartaGen.css" disabled/>
+	<link rel="stylesheet" href="./themes/Magnetronics.css" />
+	<link rel="stylesheet" href="./themes/Menu-Effect.css" disabled/>
 	
-	<!--<link rel="stylesheet" href="./themes/Pixel.css" />-->
-	<!--<link rel="stylesheet" href="./img/pixelmoon/style.css" />-->
+	<link rel="stylesheet" href="./themes/Pixel.css" disabled/>
+	<link rel="stylesheet" href="./img/pixelmoon/style.css" disabled/>
 	
 	
 	
@@ -52,12 +53,14 @@
 	<script src="./js/AppKit/PageView.js"></script>
 	<script src="./js/AppKit/Page.js"></script>
 	<script src="./js/AppKit/Menu.js"></script>
+	<!--<script src="./js/AppKit/StyleSass.js"></script>-->
 	<script src="./js/AppKit.js" responsizes="{[400,640,800]}" debug="hello instance initialize event">
 	{
 		'#app': WebApp,
 		'Page': Page,
 		'PageView': PageView,
 		'Menu': Menu,
+		// 'style[sass]': StyleSass
 	}
 	</script>
 	
@@ -65,6 +68,12 @@
 	<script src="./js/bindings.js"></script>
 	
 	
+	<!--<style sass themeColor="#6F0">-->
+	<!--	WebApp {-->
+	<!--		background: $themecolor;-->
+	<!--		border: 4px solid red;-->
+	<!--	}-->
+	<!--</style>-->
 	<style>
 		.icon { font-size: 34px; }
 		
@@ -72,26 +81,39 @@
 			padding: 0px;
 			overflow: hidden;
 		}
+		
 		@media  (min-width: 800px) {
 			
-			Menu { width: 25%; }
-			Menu.close {
-				width: 25%;
-				transform: translate(0);
-				-o-transform: translate(0);
-				-ms-transform: translate(0);
-				-moz-transform: translate(0);
-				-webkit-transform: translate(0);
-			}
+			Menu { width: 250px; }
+		/*	Menu { width: 25%; }*/
+		/*	Menu.close {*/
+		/*		width: 25%;*/
+		/*		transform: translate(0);*/
+		/*		-o-transform: translate(0);*/
+		/*		-ms-transform: translate(0);*/
+		/*		-moz-transform: translate(0);*/
+		/*		-webkit-transform: translate(0);*/
+		/*	}*/
 			WebApp {
-				width: 75%;
+		/*		width: 75%;*/
+				left: 0;
 				right: 0;
+				width: auto;
+				transition: all 0.3s ease-out;
 			}
-				WebApp.leftMenuOpen, WebApp.rightMenuOpen {
-					transform: translateX(0);
-					-ms-transform: translateX(0);
-					-webkit-transform: translateX(0);
+				WebApp.leftMenuOpen {
+					left: 250px;
+					transform: none;
 				}
+				WebApp.rightMenuOpen {
+					right: 250px;
+					transform: none;
+				}
+		/*		WebApp.leftMenuOpen, WebApp.rightMenuOpen {*/
+		/*			transform: translateX(0);*/
+		/*			-ms-transform: translateX(0);*/
+		/*			-webkit-transform: translateX(0);*/
+		/*		}*/
 					WebApp.leftMenuOpen:after, WebApp.rightMenuOpen:after {
 						pointer-events: none;
 						opacity: 0;
@@ -115,13 +137,13 @@
 		<header>
 			<h2 class="title">Choose a level</h2>
 		</header>
-		<ul>
+		<ul verticalScrollPolicy="on" horizontalScrollPolicy="off">
 			<li>Item 1</li>
 			<li>Item 2</li>
 			<li>Item 3</li>
 			<li>Item 4</li>
 			<li class="title">Title (8)</li>
-			<li>Item 1</li>
+			<li>Item 1</li>	
 			<li>Item 2</li>
 			<li>Item 3</li>
 			<li>Item 4</li>
@@ -143,49 +165,54 @@
 		<header>
 			<h2 class="title">Choose a level</h2>
 		</header>
-		<PageView selectedIndex="0">
+		<!--<PageView selectedIndex="0">-->
 			
-			<Page style="background: #FFF;">
+		<!--	<Page style="background: #FFF;">-->
 				<ul>
-					<li>Item 1</li>
-					<li>Item 2</li>
-					<li>Item 3</li>
-					<li>Item 4</li>
-					<li class="title">Title</li>
-					<li>Item 1</li>
-					<li>Item 2</li>
-					<li>Item 3</li>
-					<li>Item 4</li>
-					<li>Item 5</li>
-					<li>Item 6</li>
-					<li>Item 7</li>
-					<li>Item 8</li>
-					<li class="title">Title</li>
-					<li>Item 1</li>
-					<li>Item 2</li>
-					<li>Item 3</li>
-					<li>Item 4</li>
-					<li>Item 5</li>
-					<li>Item 6</li>
-					<li>Item 7</li>
-					<li>Item 8</li>
+		<!--			<li>Item 1</li>-->
+		<!--			<li>Item 2</li>-->
+		<!--			<li>Item 3</li>-->
+		<!--			<li>Item 4</li>-->
+		<!--			<li class="title">Title</li>-->
+		<!--			<li>Item 1</li>-->
+		<!--			<li>Item 2</li>-->
+		<!--			<li>Item 3</li>-->
+		<!--			<li>Item 4</li>-->
+		<!--			<li>Item 5</li>-->
+		<!--			<li>Item 6</li>-->
+		<!--			<li>Item 7</li>-->
+		<!--			<li>Item 8</li>-->
+		<!--			<li class="title">Title</li>-->
+		<!--			<li>Item 1</li>-->
+		<!--			<li>Item 2</li>-->
+		<!--			<li>Item 3</li>-->
+		<!--			<li>Item 4</li>-->
+		<!--			<li>Item 5</li>-->
+		<!--			<li>Item 6</li>-->
+		<!--			<li>Item 7</li>-->
+		<!--			<li>Item 8</li>-->
 				</ul>
-			</Page>
+		<!--	</Page>-->
 			
-		</PageView>
+		<!--</PageView>-->
 		
 	</Menu>
 	
 	<Menu id="settingsMenu" class="close" side="right">
 		<header>
-			<h2 class="title">Choose a level</h2>
+			<h2 class="title">Settings</h2>
 		</header>
 		<ul>
-			<li>Item 1</li>
-			<li>Item 2</li>
-			<li>Item 3</li>
-			<li>Item 4</li>
-			<li class="title">Title</li>
+			<li class="title">Themes</li>
+			<li onClick="app.switchTheme(this.innerText)">citypical</li>
+			<li onClick="app.switchTheme(this.innerText)">citypical2</li>
+			<li onClick="app.switchTheme(this.innerText)">Minimal</li>
+			<li onClick="app.switchTheme(this.innerText)">Blackstic</li>
+			<li onClick="app.switchTheme(this.innerText)">CartaGen</li>
+			<li onClick="app.switchTheme(this.innerText)">Magnetronics</li>
+			<li onClick="app.switchTheme(this.innerText)">Pixel</li>
+			<li class="title">Effects</li>
+			<li>Menu-Effect</li>
 			<li>Item 1</li>
 			<li>Item 2</li>
 			<li>Item 3</li>
@@ -216,6 +243,12 @@
 				// Create the map
 				// this.showMap();
 			}
+			this.switchTheme = function( name )
+			{
+				// debugger;
+				$('link[href^="./themes"]').prop('disabled', true);
+				$('link[href="./themes/'+name+'.css"]').prop('disabled', false);
+			}
 		</script>
 		
 		<header>
@@ -231,13 +264,32 @@
 
 		<PageView selectedIndex="0">
 			
-			<Page style="background: #FFF;">
+			<Page coucou="true">
 				Page 0
 			</Page>
 			
 		</PageView>
 	</WebApp>
 	
-		
+	<script src="./libs/sass.sync.js"></script>
+	<!--script>
+		// when loading the worker api via script[src$="/sass.js"] it's a safe bet the worker
+		// will be found relative to that file. In any other case you'd have to define where
+		// the worker is located before initializing Sass:
+		// Sass.setWorkerUrl('./libs/sass.worker.js');
+		var sass = new Sass();
+		sass.writeFile('testfile.scss', '@import "sub/deeptest";\n.testfile { content: "loaded"; }', function() {
+			console.log('wrote "testfile.scss"');
+		});
+		sass.writeFile('sub/deeptest.scss', '.deeptest { content: "loaded"; }', function() {
+			console.log('wrote "sub/deeptest.scss"');
+		});
+		sass.options({ style: Sass.style.expanded }, function(result) {
+			console.log("set options");
+		});
+		sass.compile('@import "testfile";', function(result) {
+			console.log("compiled", result.text);
+		});
+	</script-->
 </body>
 </html>
