@@ -42,3 +42,20 @@ var StyleSass = NodeClass.extend({
 	}
 	
 });
+// when loading the worker api via script[src$="/sass.js"] it's a safe bet the worker
+// will be found relative to that file. In any other case you'd have to define where
+// the worker is located before initializing Sass:
+// Sass.setWorkerUrl('./libs/sass.worker.js');
+// var sass = new Sass();
+// sass.writeFile('testfile.scss', '@import "sub/deeptest";\n.testfile { content: "loaded"; }', function() {
+// 	console.log('wrote "testfile.scss"');
+// });
+// sass.writeFile('sub/deeptest.scss', '.deeptest { content: "loaded"; }', function() {
+// 	console.log('wrote "sub/deeptest.scss"');
+// });
+// sass.options({ style: Sass.style.expanded }, function(result) {
+// 	console.log("set options");
+// });
+// sass.compile('@import "testfile";', function(result) {
+// 	console.log("compiled", result.text);
+// });
