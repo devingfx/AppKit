@@ -1,0 +1,37 @@
+#tabbar {
+	background: #222 url('http://c.woopic.com/Divertissement/icons/A/headLite.png') no-repeat 0 1px;
+	box-shadow: 0 -5px 10px rgba(0,0,0,0.5);
+	height: 70px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	overflow: hidden;
+}
+	#tabbar ul {
+		margin: 0;
+		padding: 0;
+	}
+		#tabbar li {
+			display: block;
+			float: left;
+			text-align: center;
+		}
+			#tabbar li icon {
+				width: 50px;
+				height: 50px;
+				display: block;
+				background-size: 100%;
+				margin: auto;
+			}
+				#tabbar li icon.map { background-image: url(../img/theme2/map.png); }
+				#tabbar li icon.events { background-image: url(../img/theme2/events.png); }
+				#tabbar li icon.messages { background-image: url(../img/theme2/messages.png); }
+			#tabbar li span {
+				display: block;
+				text-shadow: 0 2px 0 #000;
+				margin-top: -3px;
+			}
+		#tabbar li.disabled {
+			pointer-events: none;
+			opacity: 0.3;
+		}

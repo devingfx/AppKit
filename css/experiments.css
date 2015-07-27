@@ -1,0 +1,67 @@
+#loading {
+	position: absolute;
+    top: 26px;
+    z-index: 10;
+    right: 56px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 10px solid white;
+    margin: -35px -35px;
+    border-top-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 1);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    -webkit-transition: all 1s linear;
+    -webkit-transform: rotate(1000deg) scale(0.3);
+}
+
+@-webkit-keyframes loading
+{
+	from {
+		background-position: 0 1px, 0px 0;
+	}
+	to {
+		background-position: 0 1px, 64px 0;
+	}
+}
+
+body.loading header {
+	background-repeat: repeat-x;
+	-webkit-animation: loading 2s linear infinite;
+	background-image: 	url('http://c.woopic.com/Divertissement/icons/A/headLite.png'), 
+						url('../img/theme2/black-white-stripes-pattern-30.png');
+}
+
+
+/* android 4+ input style
+input[type=text] {
+	background: none;
+	border: none;
+	outline: none;
+	color: white;
+	padding: 3px 5px;
+	position: relative;
+}
+	input[type=text]:after {
+		content: "";
+		display: block;
+		position: absolute;
+		border: 2px solid #F60;
+		border-top: none;
+		height: 4px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+textarea {
+	background-color: transparent;
+	border: 0px solid transparent;
+	outline: none;
+	color: white;
+	border-left: 1px solid #F60;
+	border-bottom: 2px solid #F60;
+	margin: 10px 0;
+}
+*/
+
+
