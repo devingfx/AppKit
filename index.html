@@ -21,7 +21,13 @@
 	
 	
 	<link rel="stylesheet" href="./css/reset.css"/>
-	<link rel="stylesheet" href="./css/app.css"/>
+	
+	<link rel="stylesheet" href="./css/core.css"/>
+	<link rel="stylesheet" href="./css/WebApp.css"/>
+	<link rel="stylesheet" href="./css/Menu.css"/>
+	<link rel="stylesheet" href="./css/PageView.css"/>
+	<link rel="stylesheet" href="./css/Page.css"/>
+	
 	<link rel="stylesheet" href="./img/appkit-icons/style.css" />
 	<!--<link rel="stylesheet" href="./themes/OpenSans.css"/>-->
 	<!--<link rel="stylesheet" href="./app/css/app.css" />-->
@@ -35,7 +41,7 @@
 	<link rel="stylesheet" href="./themes/Menu-Effect.css" disabled/>
 	
 	<link rel="stylesheet" href="./themes/Pixel.css" disabled/>
-	<link rel="stylesheet" href="./img/pixelmoon/style.css" disabled/>
+	<!--<link rel="stylesheet" href="./img/pixelmoon/style.css" disabled/>-->
 	
 	
 	
@@ -241,7 +247,8 @@
 			<h1 class="title">AppKit - demo<span id="testName"></span></h1>
 			
 			<span class="version">version: 0.1.15</span>
-			<span class="icon-cancel3" onClick="window.close()" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>
+			<span class="icon-cog" onClick="app.toggleMenu($('#settingsMenu'))" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>
+			<!--<span class="icon-cancel3" onClick="window.close()" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>-->
 			
 		</header>
 

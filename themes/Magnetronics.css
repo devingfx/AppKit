@@ -52,6 +52,7 @@ h3, h4, h5, h6 { color: #DA5700; }
 
 WebApp {
 	box-shadow: 0 0 30px rgba(0,0,0,0.3);
+	background-color: #F0F8FF;
 }
 WebApp > header, Menu > header {
 	color: #FFF;

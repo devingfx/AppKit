@@ -1,6 +1,8 @@
 
 WebApp {
-	-webkit-transition: -webkit-transform 0.3s ease-out;
+	background-color: #282828;
+	box-shadow: 5px 0 10px rgba(0,0,0,0.5);
+	transition: transform 0.3s ease-out;
 }
 	WebApp:after {
 		content: "";
@@ -22,27 +24,45 @@ WebApp {
 			opacity: 0.6;
 		}
 
+
+
 Menu {
-	position: absolute;
-	width: 75%;
-	height: 100%;
-	overflow-y: scroll;
-	-webkit-transition: all 0.3s ease-out;
+	background: #282828;
+	transition: all 0.3s ease-out;
 	-webkit-transform-origin-x: 100%;
 }
 Menu.close {
+	transform: scale(0.7);
+	opacity: 0;
 }
-	Menu ul {
-		margin: 0;
-		padding: 0;
+	Menu header {
+		height: 50px;
+		padding: 8px;
+		background-color: #444;
+		border-top: 1px solid #555;
+		border-bottom: 1px solid #222;
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(100%, rgba(0, 0, 0, 0.3)), color-stop(00%, transparent));
 	}
+		Menu header h2.title {
+			line-height: 34px;
+			color: #fff;
+		}
+	Menu ul {}
 		Menu li {
-			list-style: none;
-			width: 100%;
-			display: block;
+			font: 16px tahoma, arial, helvetica;
+			color:#CCC;
+			text-shadow: 0 2px 0 #000;
+			letter-spacing: 1px;
+			border-top: 1px solid #555;
+			border-bottom: 1px solid #222;
 			padding: 10px 20px;
 			font-weight: bold;
 			box-sizing: border-box;
+			background-color: #444;
+			/*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(100%, rgba(0, 0, 0, 0.3)), color-stop(00%, transparent)), -webkit-gradient(linear, 50% top, 130% top, color-stop(0%, #444), color-stop(100%, transparent));*/
+			background-repeat: no-repeat;
+			background-position: right;
+			background-size: 100%, 100%, 50%;
 		}
 		Menu li.title {
 			padding: 4px 10px;
@@ -69,22 +89,7 @@ Menu.close {
 		}
 
 
-#loading {
-	position: absolute;
-    top: 26px;
-    z-index: 10;
-    right: 56px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    border: 10px solid white;
-    margin: -35px -35px;
-    border-top-color: rgba(255, 255, 255, 0);
-    border-right-color: rgba(255, 255, 255, 1);
-    border-bottom-color: rgba(255, 255, 255, 0);
-    -webkit-transition: all 1s linear;
-    -webkit-transform: rotate(1000deg) scale(0.3);
-}
+
 
 @-webkit-keyframes loading
 {
@@ -103,10 +108,9 @@ body.loading header {
 						url('../img/theme2/black-white-stripes-pattern-30.png');
 }
 /******************************************************************************
- *  Header
+ *  WEbApp header
  *****************************************************************************/
-
-header {
+WebApp > header {
 	height: 50px;
 	color: white;
 	padding: 8px;
@@ -119,11 +123,20 @@ header {
 	background-position: 0 1px, 0;
 	box-shadow: 0 5px 10px rgba(0,0,0,0.5);
 }
-	header div {
+	WebApp > header .icon {
+		float:	left;
+		-webkit-app-region: no-drag;
+	}
+	WebApp > header .title {
+		display: inline-block;
+		margin: 0;
+		font-size: 20px;
+	}
+	WebApp > header .nav {
 		position: absolute;
 		left: 50%;
 	}
-	header span {
+	WebApp > header .nav span {
 		color: white;
 		font-weight: bold;
 		text-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
@@ -149,6 +162,10 @@ header {
 
 	}
 
+
+
+
+
 	header span.title {
 		opacity: 1;
 	}
@@ -169,9 +186,29 @@ header {
 	}
 
 
+	WebApp > header .nav span.title {
+		opacity: 1;
+	}
+	WebApp > header .nav span.back {
+		opacity: 1;
+		overflow: visible;
+		width: initial;
+		margin: 0;
+		font-size: 14px;
+		padding: 5px 12px;
+		max-width: 100px;
+		/*border: 1px solid #0E0E0E;*/
+		/*border-radius: 5px;
+		background: #f60;*/
+		margin-top: 4px;
+		padding-right: 8px;
+		/*background: -webkit-gradient(linear, left top, left bottom, color-stop(100%, rgba(0, 0, 0, 0.3)), color-stop(00%, rgba(255,255,255,0.5))), #f60;*/
+	}
 
 
-	header span:after {
+
+
+	WebApp > header .nav span:after {
 		content: "";
 		display: block;
 		position: absolute;
@@ -185,7 +222,7 @@ header {
 		-webkit-transition: all 0.3s ease-out;
 		z-index: -1;
 	}
-	header span:before {
+	WebApp > header .nav span:before {
 		content: "";
 		display: block;
 		position: absolute;
@@ -201,10 +238,12 @@ header {
 		-moz-transform: rotate(180deg);
 		z-index: -1;
 	}
-	header span.back:before, header span.back:after {
+	WebApp > header .nav span.back:before, WebApp > header .nav span.back:after {
 		opacity: 1;
 	}
-	/*header.desktop span {
+
+
+	/*WebApp > header.desktop span {
 		color: white;
 		font-size: 30px;
 		font-weight: bold;
@@ -212,11 +251,12 @@ header {
 		line-height: 56px;
 		vertical-align: top;
 		margin-left: 30px;
-	}*/
+	}
 	header img {
 		width: 35px;
 		float:	right;
 	}
+	*/
 
 
 PageView {

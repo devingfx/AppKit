@@ -18,7 +18,7 @@ Menu.close {
 		background-color: grey;
 	}
 		Menu header h2 {
-			line-height: 40px;
+			line-height: 34px;
 			margin-left: 10px;
 		}
 	Menu ul {  }
@@ -32,16 +32,14 @@ Menu.close {
 			height: 30px;
 			font-size: 14px;
 			line-height: 10px;
-			line-height: 28px;
 		}
 		Menu li:hover, Menu li:active {
 			background: rgba(255,255,255,0.5);
 		}
 		
-		header h2:active { background: red }
-		
 		Menu li.title {
 			font-size: 20px;
+			line-height: 22px;
 			padding: 4px 10px;
 			color: #fff;
 			height: 30px;
