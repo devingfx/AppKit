@@ -47,6 +47,9 @@
 	
 	<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
 	<script src="./libs/jquery-2.0.3.min.js"></script>
+	<script src="./libs/iscroll-lite.js"></script>
+	<script src="./js/bindings.js"></script>
+	<!--<script src="./js/repeaters.js"></script>-->
 	
 	<script src="./js/console.emit.js" keep="true"
 	    	level="hello instance initialize event THREEElement NodeClass WebApp Page PageView Menu Jilex"></script>
@@ -71,8 +74,6 @@
 	}
 	</script>
 	
-	<script src="./libs/iscroll-lite.js"></script>
-	<script src="./js/bindings.js"></script>
 	
 	
 	<!--<style sass themeColor="#6F0">-->
@@ -97,10 +98,6 @@
 		/*	Menu.close {*/
 		/*		width: 25%;*/
 		/*		transform: translate(0);*/
-		/*		-o-transform: translate(0);*/
-		/*		-ms-transform: translate(0);*/
-		/*		-moz-transform: translate(0);*/
-		/*		-webkit-transform: translate(0);*/
 		/*	}*/
 			WebApp {
 		/*		width: 75%;*/
@@ -119,8 +116,6 @@
 				}
 		/*		WebApp.leftMenuOpen, WebApp.rightMenuOpen {*/
 		/*			transform: translateX(0);*/
-		/*			-ms-transform: translateX(0);*/
-		/*			-webkit-transform: translateX(0);*/
 		/*		}*/
 					WebApp.leftMenuOpen:after, WebApp.rightMenuOpen:after {
 						pointer-events: none;
@@ -135,6 +130,7 @@
 			padding-right: 40px;
 			-webkit-app-region: no-drag;
 		}
+		
 	</style>
 
 </head>

@@ -51,7 +51,7 @@ var WebApp = NodeClass.extend({
 		{
 			_this.preinitialize();
 		});
-
+		AppKit.addEventListener('initialize', this.initialize.bind(this));
 		window.addEventListener('resize', this._onResize.bind(this));
 		this._onResize();
 
@@ -125,7 +125,7 @@ var WebApp = NodeClass.extend({
 		{
 			this.$el.toggleClass($menu.attr('side') + 'MenuOpen');
 			$menu.toggleClass('close');
-			$menu[0]._iScroll.refresh();
+			// $menu[0]._iScroll.refresh();
 		}
 	}
 });

@@ -4,7 +4,7 @@
 function localScript(root)
 {
 	var root = root || $('html');
-	root.children('script[type="text/javascript/local"]').each(function ()
+	root.find('script[type="text/javascript/local"]').each(function ()
 	{
 		if(!this.executed)
 		{
@@ -61,7 +61,7 @@ var AppKitClass = NodeClass.extend({
 		localScript();
 
 		// Define bindings
-		bindings(document.body, true);
+		bindings( document.body, true );
 		
 		// (Very) simple responsive helper
 		if( /mobile/i.test(navigator.userAgent) )
@@ -70,7 +70,15 @@ var AppKitClass = NodeClass.extend({
 			$('html').addClass('desktop');
 		
 		// $('html').trigger('preinitialize');
+		this.dispatchEvent(new Event('preinitialize'));
 		document.getElementsByTagName('html')[0].dispatchEvent(new Event('preinitialize'));
+	},
+	
+	initialize: function()
+	{
+		this._super();
+		this.dispatchEvent(new Event('initialize'));
+		document.getElementsByTagName('html')[0].dispatchEvent(new Event('initialize'));
 	}
 });
 
