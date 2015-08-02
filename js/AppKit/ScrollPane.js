@@ -4,7 +4,7 @@
 var ScrollPane = NodeClass.extend({
 	
 	verticalScrollPolicy: 'on',
-	horizontalscrollpolicy: 'on',
+	horizontalScrollPolicy: 'on',
 	
 	construct: function ScrollPane()
 	{
@@ -55,6 +55,12 @@ var ScrollPane = NodeClass.extend({
 	{
 		this._iScroll.refresh();
 		//console.log(this.$scroller.outerHeight());
+	},
+	
+	preinitialize: function()
+	{
+		this._super();
+		this.layout;
 	},
 	
 	initialize: function()
