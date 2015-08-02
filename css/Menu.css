@@ -38,6 +38,11 @@ Menu.close {
 			margin: 0;
 			font-size: 20px;
 		}
+	Menu ScrollPane {
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+	}
 	Menu ul {
 		margin: 0;
 		padding: 0;

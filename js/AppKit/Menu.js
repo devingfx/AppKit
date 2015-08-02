@@ -10,22 +10,23 @@ var Menu = NodeClass.extend({
 		this._super();
 		
 		this.$head = this.$el.find('header').eq(0);
-		// this.$scroller = $('<div class="scroller"/>');
 		
-		this.$el.find('ul').wrap('<scroller/>');
+		this.$el.find('ul').wrap('<ScrollPane/>');
 		
-		this.$scroller = this.$el.find('scroller');
+		this.$scroller = this.$el.find('ScrollPane');
+		// this.$scroller.applyClass( ScrollPane );
 		
-		this._iScroll = new IScroll(this.$scroller[0], {
-			/* click: true, */
-			preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|LI)$/ },
-			hScroll: false,
-			vScroll: true,
-			vScrollbar: true
-		});
+		// this._iScroll = new IScroll(this.$scroller[0], {
+		// 	/* click: true, */
+		// 	preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|LI)$/ },
+		// 	hScroll: false,
+		// 	vScroll: true,
+		// 	vScrollbar: true
+		// });
 		
+		AppKit.addEventListener('initialize', this.initialize.bind(this));
 		window.addEventListener('resize', this._onResize.bind(this));
-		this._onResize();
+		// this._onResize();
 		
 		//console.emit(/instance/, 'groupEnd');
 		console.html('<groupEnd level="instance"/>');
@@ -36,7 +37,7 @@ var Menu = NodeClass.extend({
 		if(this.$head.length)
 			this.$scroller.css({top: this.$head.outerHeight(), height: window.innerHeight - this.$head.outerHeight()});
 		
-		this._iScroll.refresh();
+		this.$scroller[0]._iScroll.refresh();
 		
 		//console.log(this.$scroller.outerHeight());
 	},

@@ -47,7 +47,7 @@
 	
 	<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
 	<script src="./libs/jquery-2.0.3.min.js"></script>
-	<script src="./libs/iscroll-lite.js"></script>
+	<script src="./libs/iScroll5/iscroll.js"></script>
 	<script src="./js/bindings.js"></script>
 	<!--<script src="./js/repeaters.js"></script>-->
 	
@@ -62,6 +62,7 @@
 	<script src="./js/AppKit/PageView.js"></script>
 	<script src="./js/AppKit/Page.js"></script>
 	<script src="./js/AppKit/Menu.js"></script>
+	<script src="./js/AppKit/ScrollPane.js"></script>
 	<!--<script src="./libs/sass.sync.js"></script>-->
 	<!--<script src="./js/AppKit/StyleSass.js"></script>-->
 	<script src="./js/AppKit.js" responsizes="{[400,640,800]}" debug="hello instance initialize event">
@@ -70,6 +71,7 @@
 		'Page': Page,
 		'PageView': PageView,
 		'Menu': Menu,
+		'ScrollPane': ScrollPane
 		// 'style[sass]': StyleSass
 	}
 	</script>
@@ -131,6 +133,44 @@
 			-webkit-app-region: no-drag;
 		}
 		
+		Square {
+			display: block;
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			background: red;
+			margin: 3px;
+		}
+		ScrollPane {
+			position: relative;
+			display: block;
+			overflow: hidden;
+			
+		}
+			ScrollPane pane {
+				display: block;
+				/*overflow: visible;*/
+			}
+			ScrollPane scrollbar {
+				display: block;
+				position: absolute;
+				z-index: 9999;
+				overflow: hidden;
+			}
+				ScrollPane scrollbar[vertical] {
+					bottom: 8px;
+					width: 7px;
+					top: 1px;
+					right: 1px;
+				}
+				ScrollPane scrollbar[horizontal] {
+					bottom: 1px;
+					left: 1px;
+					right: 8px;
+					height: 7px;
+				}
+				
+			
 	</style>
 
 </head>
@@ -250,7 +290,30 @@
 
 		<PageView selectedIndex="0">
 			
-			<Page>Page 0</Page>
+			<Page>
+				<ScrollPane style="width:100%;height:100%" horizontalScrollPolicy="off">
+					<Square>
+						<script type="text/javascript/local">
+							setTimeout((function(){
+								var parent = this.parentNode, last;
+								for( var i = 0, il = 10; i < il; i++ )
+									for( var j = 0, jl = 10; j < jl; j++ )
+										parent.appendChild(
+											(last = 	$( this.cloneNode() )
+														.css({
+															top: 53 * i,
+															left: 53 * j
+														})
+											)[0]
+										);
+								parent.removeChild( this );
+								$( parent ).width( $(last).position().left + 53 );
+								$( parent ).height( $(last).position().top + 53 );
+							}).bind(this), 3000 )
+						</script>
+					</Square>
+				</ScrollPane>
+			</Page>
 			<Page>Page 1</Page>
 			<Page>Page 2</Page>
 			<Page>Page 3</Page>

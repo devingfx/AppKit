@@ -1,4 +1,8 @@
 
+scrollbar indicator {
+	background: #CCC;
+}
+
 WebApp {
 	background-color: #282828;
 	box-shadow: 5px 0 10px rgba(0,0,0,0.5);

@@ -51,7 +51,9 @@ h1 { color: #DA5700; font-size: 32px; }
 h2 { color: #F60; }
 h3, h4, h5, h6 { color: #DA5700; }
 
-
+scrollbar indicator {
+	background: #DA5700;
+}
 WebApp {
 	box-shadow: 0 0 30px rgba(0,0,0,0.3);
 }
