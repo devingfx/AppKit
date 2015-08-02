@@ -9,9 +9,11 @@ var Menu = NodeClass.extend({
 		console.html('<group level="instance" c="instance"><span c="icon instance">.</span>Class <span c="AppKit class">Menu</span> inherits:</group>');
 		this._super();
 		
+		$('body').prepend( this.$el );
+		
 		this.$head = this.$el.find('header').eq(0);
 		
-		this.$el.find('ul').wrap('<ScrollPane/>');
+		this.$el.find('ul').wrap('<ScrollPane horizontalScrollPolicy="off"/>');
 		
 		this.$scroller = this.$el.find('ScrollPane');
 		// this.$scroller.applyClass( ScrollPane );

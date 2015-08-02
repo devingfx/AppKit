@@ -58,20 +58,20 @@
 	<script src="./js/AppKit/Class.js"></script>
 	<script src="./js/AppKit/EventDispatcher.js"></script>
 	<script src="./js/AppKit/NodeClass.js"></script>
+	<script src="./js/AppKit/ScrollPane.js"></script>
 	<script src="./js/AppKit/WebApp.js"></script>
 	<script src="./js/AppKit/PageView.js"></script>
 	<script src="./js/AppKit/Page.js"></script>
 	<script src="./js/AppKit/Menu.js"></script>
-	<script src="./js/AppKit/ScrollPane.js"></script>
 	<!--<script src="./libs/sass.sync.js"></script>-->
 	<!--<script src="./js/AppKit/StyleSass.js"></script>-->
 	<script src="./js/AppKit.js" responsizes="{[400,640,800]}" debug="hello instance initialize event">
 	{
 		'#app': WebApp,
-		'Page': Page,
-		'PageView': PageView,
 		'Menu': Menu,
-		'ScrollPane': ScrollPane
+		'ScrollPane': ScrollPane,
+		'Page': Page,
+		'PageView': PageView
 		// 'style[sass]': StyleSass
 	}
 	</script>
@@ -138,7 +138,8 @@
 			position: absolute;
 			width: 50px;
 			height: 50px;
-			background: red;
+			border: 1px solid #4898AC;
+			background: white;
 			margin: 3px;
 		}
 		ScrollPane {
@@ -147,28 +148,39 @@
 			overflow: hidden;
 			
 		}
-			ScrollPane pane {
+			pane {
 				display: block;
 				/*overflow: visible;*/
 			}
-			ScrollPane scrollbar {
+				header ~ PageView pane {
+					margin-top: 50px;
+				}
+				header ~ PageView Page ScrollBar[vertical] {
+					margin-top: 50px;
+				}
+			/*ScrollPane*/ scrollbar {
 				display: block;
 				position: absolute;
 				z-index: 9999;
 				overflow: hidden;
 			}
-				ScrollPane scrollbar[vertical] {
+				/*ScrollPane*/ scrollbar[vertical] {
 					bottom: 8px;
 					width: 7px;
 					top: 1px;
 					right: 1px;
 				}
-				ScrollPane scrollbar[horizontal] {
+				/*ScrollPane*/ scrollbar[horizontal] {
 					bottom: 1px;
 					left: 1px;
-					right: 8px;
+					right: 1px;
 					height: 7px;
 				}
+				/*ScrollPane*/ scrollbar[vertical] +
+				/*ScrollPane*/ scrollbar[horizontal] {
+					right: 8px;
+				}
+				
 				
 			
 	</style>
@@ -177,90 +189,93 @@
 
 <body debug="true">
 	
-	<Menu id="levelMenu" class="close" side="left">
-		<header>
-			<h2 class="title">Choose a level</h2>
-		</header>
-		<ul verticalScrollPolicy="on" horizontalScrollPolicy="off">
-			<li>Item 1</li>
-			<li>Item 2</li>
-			<li>Item 3</li>
-			<li>Item 4</li>
-			<li class="title">Title (8)</li>
-			<li>Item 1</li>	
-			<li>Item 2</li>
-			<li>Item 3</li>
-			<li>Item 4</li>
-			<li>Item 5</li>
-			<li>Item 6</li>
-			<li>Item 7</li>
-			<li>Item 8</li>
-			<li class="title">Title (6)</li>
-			<li>Item 1</li>
-			<li>Item 2</li>
-			<li>Item 3</li>
-			<li>Item 4</li>
-			<li>Item 5</li>
-			<li>Item 6</li>
-		</ul>
-	</Menu>
 	
-	<Menu id="nestedMenu" class="close" side="left">
-		<header>
-			<h2 class="title">Choose a level</h2>
-		</header>
-		<!--<PageView selectedIndex="0">-->
-			
-		<!--	<Page style="background: #FFF;">-->
-				<ul>
-		<!--			<li>Item 1</li>-->
-		<!--			<li>Item 2</li>-->
-		<!--			<li>Item 3</li>-->
-		<!--			<li>Item 4</li>-->
-		<!--			<li class="title">Title</li>-->
-		<!--			<li>Item 1</li>-->
-		<!--			<li>Item 2</li>-->
-		<!--			<li>Item 3</li>-->
-		<!--			<li>Item 4</li>-->
-		<!--			<li>Item 5</li>-->
-		<!--			<li>Item 6</li>-->
-		<!--			<li>Item 7</li>-->
-		<!--			<li>Item 8</li>-->
-		<!--			<li class="title">Title</li>-->
-		<!--			<li>Item 1</li>-->
-		<!--			<li>Item 2</li>-->
-		<!--			<li>Item 3</li>-->
-		<!--			<li>Item 4</li>-->
-		<!--			<li>Item 5</li>-->
-		<!--			<li>Item 6</li>-->
-		<!--			<li>Item 7</li>-->
-		<!--			<li>Item 8</li>-->
-				</ul>
-		<!--	</Page>-->
-			
-		<!--</PageView>-->
-		
-	</Menu>
-	
-	<Menu id="settingsMenu" class="close" side="right">
-		<header>
-			<h2 class="title">Settings</h2>
-		</header>
-		<ul>
-			<li class="title">Themes</li>
-			<li onClick="app.switchTheme(this.innerText)">citypical</li>
-			<li onClick="app.switchTheme(this.innerText)">citypical2</li>
-			<li onClick="app.switchTheme(this.innerText)">Minimal</li>
-			<li onClick="app.switchTheme(this.innerText)">Blackstic</li>
-			<li onClick="app.switchTheme(this.innerText)">CartaGen</li>
-			<li onClick="app.switchTheme(this.innerText)">Magnetronics</li>
-			<li onClick="app.switchTheme(this.innerText)">Pixel</li>
-			<li class="title">Effects</li>
-			<li>Menu-Effect</li>
-		</ul>
-	</Menu>
 
 	<WebApp id="app" onInitialize="this.coucou(event, this.tagName)">
+		
+		<Menu id="pageMenu" class="close" side="left">
+			<header>
+				<h2 class="title">Choose an exemple</h2>
+			</header>
+			<ul horizontalScrollPolicy="off">
+				<li onClick="app.$pageView[0].goToPage(0)">Squares</li>
+				<li onClick="app.$pageView[0].goToPage(1)">Page 1</li>
+				<li onClick="app.$pageView[0].goToPage(2)">Page 2</li>
+				<li onClick="app.$pageView[0].goToPage(3)">Page 3</li>
+				<li onClick="app.$pageView[0].goToPage(4)">Page 4</li>
+				<li class="title">Title (8)</li>
+				<li>Item 1</li>	
+				<li>Item 2</li>
+				<li>Item 3</li>
+				<li>Item 4</li>
+				<li>Item 5</li>
+				<li>Item 6</li>
+				<li>Item 7</li>
+				<li>Item 8</li>
+				<li class="title">Title (6)</li>
+				<li>Item 1</li>
+				<li>Item 2</li>
+				<li>Item 3</li>
+				<li>Item 4</li>
+				<li>Item 5</li>
+				<li>Item 6</li>
+			</ul>
+		</Menu>
+		
+		<Menu id="nestedMenu" class="close" side="left">
+			<header>
+				<h2 class="title">Choose a level</h2>
+			</header>
+			<!--<PageView selectedIndex="0">-->
+				
+			<!--	<Page style="background: #FFF;">-->
+					<ul>
+			<!--			<li>Item 1</li>-->
+			<!--			<li>Item 2</li>-->
+			<!--			<li>Item 3</li>-->
+			<!--			<li>Item 4</li>-->
+			<!--			<li class="title">Title</li>-->
+			<!--			<li>Item 1</li>-->
+			<!--			<li>Item 2</li>-->
+			<!--			<li>Item 3</li>-->
+			<!--			<li>Item 4</li>-->
+			<!--			<li>Item 5</li>-->
+			<!--			<li>Item 6</li>-->
+			<!--			<li>Item 7</li>-->
+			<!--			<li>Item 8</li>-->
+			<!--			<li class="title">Title</li>-->
+			<!--			<li>Item 1</li>-->
+			<!--			<li>Item 2</li>-->
+			<!--			<li>Item 3</li>-->
+			<!--			<li>Item 4</li>-->
+			<!--			<li>Item 5</li>-->
+			<!--			<li>Item 6</li>-->
+			<!--			<li>Item 7</li>-->
+			<!--			<li>Item 8</li>-->
+					</ul>
+			<!--	</Page>-->
+				
+			<!--</PageView>-->
+			
+		</Menu>
+		
+		<Menu id="settingsMenu" class="close" side="right">
+			<header>
+				<h2 class="title">Settings</h2>
+			</header>
+			<ul>
+				<li class="title">Themes</li>
+				<li onClick="app.switchTheme(this.innerText)">citypical</li>
+				<li onClick="app.switchTheme(this.innerText)">citypical2</li>
+				<li onClick="app.switchTheme(this.innerText)">Minimal</li>
+				<li onClick="app.switchTheme(this.innerText)">Blackstic</li>
+				<li onClick="app.switchTheme(this.innerText)">CartaGen</li>
+				<li onClick="app.switchTheme(this.innerText)">Magnetronics</li>
+				<li onClick="app.switchTheme(this.innerText)">Pixel</li>
+				<li class="title">Effects</li>
+				<li>Menu-Effect</li>
+			</ul>
+		</Menu>
 		
 		<script type="text/javascript/local">
 			
@@ -276,9 +291,9 @@
 			}
 		</script>
 		
-		<header>
+		<header followPageScroll="{page1}">
 			<span class="icon icon-layout"  title="Menu" 
-				  onClick="app.toggleMenu($('#levelMenu'))"></span>
+				  onClick="app.toggleMenu($('#pageMenu'))"></span>
 			
 			<h1 class="title">AppKit - demo<span id="testName"></span></h1>
 			
@@ -290,8 +305,9 @@
 
 		<PageView selectedIndex="0">
 			
-			<Page>
-				<ScrollPane style="width:100%;height:100%" horizontalScrollPolicy="off">
+			<Page id="page1" snapAxis="false">
+				<img src="http://www.zapalagroup.com/wp-content/uploads/2014/08/o-HAPPY-PEOPLE-facebook.jpg"/>
+				<!--<ScrollPane style="width:100%;height:100%">-->
 					<Square>
 						<script type="text/javascript/local">
 							setTimeout((function(){
@@ -307,12 +323,12 @@
 											)[0]
 										);
 								parent.removeChild( this );
-								$( parent ).width( $(last).position().left + 53 );
-								$( parent ).height( $(last).position().top + 53 );
+								// $( parent ).width( $(last).position().left + 53 );
+								// $( parent ).height( $(last).position().top + 53 );
 							}).bind(this), 3000 )
 						</script>
 					</Square>
-				</ScrollPane>
+				<!--</ScrollPane>-->
 			</Page>
 			<Page>Page 1</Page>
 			<Page>Page 2</Page>

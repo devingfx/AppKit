@@ -1,7 +1,7 @@
 /**
  * Page Class
  */
-var Page = NodeClass.extend({
+var Page = ScrollPane.extend({
 	
 	_disabled: false,
 	includeInLayout: true,

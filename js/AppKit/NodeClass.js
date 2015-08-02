@@ -40,18 +40,29 @@ var NodeClass = EventDispatcher.extend({
 		console.html('<group level="event"><o>node</o><span c="method">.preinitialize()</span></group>', {node: this});
 		
 		// Set attributes has properties
-		var ownerElement = this;
+		var _ownerElement = this;
 		$( this.attributes ).each(function ()
 		{
-			// console.log(this, ownerElement);
+			// console.log(this, _ownerElement);
+			var _attr = this;
 			if( window.NodeClass.avoidAttribute.indexOf( this.nodeName ) == -1 )
-				for( var n in ownerElement )
-					if( n.toLowerCase() == this.nodeName )
+			{
+				var prop = Object.getOwnPropertyNames( _ownerElement )
+								.filter(function(n)
+								{
+									return n.toLowerCase() == _attr.nodeName;
+								})
+								[0];
+				if( prop )
+					
+				// for( var n in _ownerElement )
+					// if( n.toLowerCase() == this.nodeName )
 					{
-						var res = ownerElement[n] = this.parse()
-						//ownerElement[n] = eval('('+this.nodeValue+')');
-						console.html('<info level="initialize">Attribute parsing: <o>attr</o> = <o>res</o></group>', {attr: this, res:res});
+						var res = _ownerElement[prop] = this.parse()
+						//_ownerElement[n] = eval('('+this.nodeValue+')');
+						console.html('<info level="initialize">Attribute parsing: <o>attr</o> = <o>res</o></group>', {attr: this, res: res});
 					}
+			}
 		});
 
 		console.html('<groupEnd level="event"/>');
