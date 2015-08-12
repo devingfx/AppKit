@@ -17,7 +17,7 @@ var WebApp = NodeClass.extend({
 		});
 		
 		// Select important nodes
-		this.$header = this.$el.find('header').eq(0);
+		this.$header = this.$el.find('> header').eq(0);
 		// this.$navMenu = this.$header.find('#menuSlide');
 		// this.$settings = $('#settingsMenu');
 		this.$pageView = $('PageView');
@@ -89,7 +89,11 @@ var WebApp = NodeClass.extend({
 		// this.$el.css({width: window.innerWidth, height: window.innerHeight});
 
 		// Fix PageView right under the header and good height
-		this.$pageView.css({top: this.$header.outerHeight(), height: window.innerHeight - this.$header.height()});
+		if( this.$header.attr('overlay') == '' )
+			this.$pageView.css({top: 0});
+		else
+			this.$pageView.css({top: this.$header.outerHeight()});
+		// this.$pageView.css({top: this.$header.outerHeight(), height: window.innerHeight - this.$header.outerHeight()});
 	},
 
 	/**
@@ -128,4 +132,98 @@ var WebApp = NodeClass.extend({
 			// $menu[0]._iScroll.refresh();
 		}
 	}
+});
+
+
+/**
+ * WebAppHeader Class
+ */
+var WebAppHeader = NodeClass.extend({
+	
+	collapseOnScroll: null,
+	_lastScroll: 0,
+	
+	construct: function WebAppHeader()
+	{
+		console.html('<group c="instance"><span level="instance" c="icon instance">.</span>Class <span c="AppKit class">WebAppHeader</span> inherits:</group>');
+		//html
+		this._super();
+		
+		var _this = this;
+		
+		AppKit.addEventListener('initialize', this.initialize.bind(this));
+		// window.addEventListener('resize', this._onResize.bind(this));
+		this._onResize();
+
+		// this.$el.triggerHandler('preinitialize');
+		
+		console.html('<groupEnd level="instance"/>');
+	},
+	
+	initialize : function ()
+	{
+		this._super();
+		if( this.collapseOnScroll && this.collapseOnScroll && this.collapseOnScroll._iScroll )
+		{
+			var _this = this,
+				_iScroll = this.collapseOnScroll._iScroll;
+				
+			_iScroll.on( 'scrollStart', this.onCollapsingScrollStart.bind(this) );
+			_iScroll.on( 'scroll', this.onCollapsingScrollMove.bind(this) );
+			_iScroll.on( 'scrollEnd', this.onCollapsingScrollEnd.bind(this) );
+		}
+	},
+	
+	onCollapsingScrollStart: function()
+	{
+		this._scrollStart = this.collapseOnScroll._iScroll.y;
+	},
+	
+	onCollapsingScrollMove: function()
+	{
+		var _this = this,
+	    	h = _this.$el.outerHeight(),
+			_iScroll = this.collapseOnScroll._iScroll,
+			delta = _this._scrollStart - _iScroll.y;
+		
+		// if( -_iScroll.y > h )
+		// {
+			// _this._scrollStart - _iScroll.y;
+			if( Math.abs(delta) > h/2 )
+			{
+				this.$el.addClass( delta >= 0 ? 'collapsed' : 'uncollapsed' )
+						.removeClass( delta >= 0 ? 'uncollapsed' : 'collapsed' );
+				 
+				this._scrollStart = delta >= 0 ? this._scrollStart + h/2 : this._scrollStart - h/2;
+				//this.collapseOnScroll._iScroll.y;
+			}
+		// }
+		// _this._percent = h / delta;
+	    // delta = delta < 0 ? 0 : delta > h ? h : delta;
+	    // console.log( "delta: %s \nh: %s", delta, h );
+	    // console.log( "last: %s \ny: %s \n%: %s", _this._lastScroll, _iScroll.y, _percent );
+	    // _this.$el.css({
+	         //transform: 'translateY(' + -(delta) + '%)'
+	         //transform: 'scaleY(' + (50+_iScroll.y)/50 + ')'
+	         //transform: 'rotateX(' + _iScroll.y + 'deg) rotateY(' + _iScroll.y/2 + 'deg)'
+	         //transform: 'rotateX(' + -_iScroll.y + 'deg)'
+	         //transform: 'translateY('+-_iScroll.y+'px) rotate(' + _iScroll.y + 'deg)'
+	     //})
+	},
+	
+	onCollapsingScrollEnd: function()
+	{
+		this._lastScroll = this.collapseOnScroll._iScroll.y;
+		console.log( "end: ", this._lastScroll, this.collapseOnScroll._iScroll.y );
+		
+	}
+	
+	
+	/**
+	 * override this method to be called on window resize
+	 */
+	// layout: function()
+	// {
+	// 	var _this = this;
+	// }
 });

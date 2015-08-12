@@ -1,0 +1,16 @@
+body {
+	perspective: 1200px;
+}
+
+WebApp > header {
+	transform-origin: 100% 25px;
+	transition: all 0.3s ease-out;
+}
+	WebApp > header.uncollapsed {
+		transform: rotateZ( 0% );
+		opacity: 1;
+	}
+	WebApp > header.collapsed {
+		transform: rotateZ( -90deg );
+		opacity: 0;
+	}

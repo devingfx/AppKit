@@ -74,7 +74,10 @@ WebApp > header, Menu > header {
 	
 		line-height: 46px;
 		font-weight: 100;
-}
+	}
+	WebApp > header[overlay] {
+		background: rgba(72, 152, 172, 0.9);
+	}
 	WebApp > header .icon {
     margin-top: 4px;
 		

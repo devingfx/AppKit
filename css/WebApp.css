@@ -62,6 +62,17 @@ WebApp > header {
 	z-index: 10;
 	-webkit-app-region: drag;
 }
+	WebApp > header[overlay] {}
+		WebApp > header[overlay] ~ PageView {
+			height: 100%;
+		}
+		WebApp > header[overlay] ~ PageView pane {
+			margin-top: 50px;
+		}
+		WebApp > header[overlay] ~ PageView Page ScrollBar[vertical] {
+			margin-top: 50px;
+		}
+	
 	WebApp > header .icon {
 		float:	left;
 		-webkit-app-region: no-drag;

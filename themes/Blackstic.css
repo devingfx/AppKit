@@ -165,7 +165,9 @@ WebApp > header {
 
 
 	}
-
+	WebApp > header[overlay] {
+		background: rgba(34, 34, 34, 0.8);
+	}
 
 
 

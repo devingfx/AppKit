@@ -5,6 +5,7 @@
 var NodeClass = EventDispatcher.extend({
 	
 	_initialized: false,
+	
 	construct: function NodeClass()
 	{
 		//console.emit(/instance/, 'group', 'Class %cNodeClass%c inherits:', ''.CORE, '');
@@ -21,10 +22,12 @@ var NodeClass = EventDispatcher.extend({
 			window[this.id] = this;
 		
 		document.getElementsByTagName('html')[0].addEventListener( 'preinitialize', this.preinitialize.bind(this) );
+		document.getElementsByTagName('html')[0].addEventListener( 'initialize', this.initialize.bind(this) );
 		
 		//console.emit(/instance/, 'groupEnd');
 		console.html('<groupEnd level="instance"/>');
 	},
+	
 	_eventAttribute: function ( eventName )
 	{
 		var _this = this;
@@ -35,6 +38,7 @@ var NodeClass = EventDispatcher.extend({
 		//console.emit(/event/, 'info', '%cEvent%c%s%c attribute listening on %o', ''.EVENT, ''.EVENT_TYPE, eventName, '', this.$el[0]);
 		console.html('<info level="event"><event attribute type="'+eventName+'" icon="attr">target</event>', {target: this});
 	},
+	
 	preinitialize: function()
 	{
 		console.html('<group level="event"><o>node</o><span c="method">.preinitialize()</span></group>', {node: this});
@@ -67,6 +71,7 @@ var NodeClass = EventDispatcher.extend({
 
 		console.html('<groupEnd level="event"/>');
 	},
+	
 	initialize: function()
 	{
 		if( this._initialized ) return;
@@ -74,6 +79,7 @@ var NodeClass = EventDispatcher.extend({
 
 		this.children.length && this._reappend();
 		
+		// for( var i = 0, c; (c = this.children[i++]) && c.initialize && c.initialize(); )
 		for( var i = 0, c; c = this.children[i++]; )
 		{
 			c.initialize && c.initialize();

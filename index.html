@@ -43,17 +43,23 @@
 	<link rel="stylesheet" href="./themes/Pixel.css" disabled/>
 	<!--<link rel="stylesheet" href="./img/pixelmoon/style.css" disabled/>-->
 	
+	<link rel="stylesheet" href="./effects/WebAppHeader.up.fx.css"/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.turn-up.fx.css" disabled/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.turn-down.fx.css" disabled/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.3d-roll-down.fx.css" disabled/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.3d-roll-up.fx.css" disabled/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.3d-fall.fx.css" disabled/>
 	
 	
 	<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
 	<script src="./libs/jquery-2.0.3.min.js"></script>
-	<script src="./libs/iScroll5/iscroll.js"></script>
+	<script src="./libs/iScroll5/iscroll-probe.js"></script>
 	<script src="./js/bindings.js"></script>
 	<!--<script src="./js/repeaters.js"></script>-->
 	
-	<script src="./js/console.emit.js" keep="true"
-	    	level="hello instance initialize event THREEElement NodeClass WebApp Page PageView Menu Jilex"></script>
-	<link rel="stylesheet" href="./css/console.css" />
+	<!--<script src="./js/console.emit.js" keep="true"-->
+	<!--    	level="hello instance initialize event THREEElement NodeClass WebApp Page PageView Menu Jilex"></script>-->
+	<!--<link rel="stylesheet" href="./css/console.css" />-->
 
 	<script src="./js/AppKit/Class.js"></script>
 	<script src="./js/AppKit/EventDispatcher.js"></script>
@@ -65,15 +71,18 @@
 	<script src="./js/AppKit/Menu.js"></script>
 	<!--<script src="./libs/sass.sync.js"></script>-->
 	<!--<script src="./js/AppKit/StyleSass.js"></script>-->
-	<script src="./js/AppKit.js" responsizes="{[400,640,800]}" debug="hello instance initialize event">
-	{
-		'#app': WebApp,
-		'Menu': Menu,
-		'ScrollPane': ScrollPane,
-		'Page': Page,
-		'PageView': PageView
-		// 'style[sass]': StyleSass
-	}
+	<script src="./js/AppKit.js" id="AppKit" 
+			responsizes="{[400,640,800]}" 
+			debug="hello instance initialize event">
+			{
+				'#app': WebApp,
+				'#app > header': WebAppHeader,
+				'Menu': Menu,
+				'ScrollPane': ScrollPane,
+				'Page': Page,
+				'PageView': PageView
+				// 'style[sass]': StyleSass
+			}
 	</script>
 	
 	
@@ -90,9 +99,12 @@
 		Page {
 			padding: 0px;
 			overflow: hidden;
-			font-size: 48px;
+			/*font-size: 48px;*/
 		}
-		
+		Page:nth-child(2) pane {
+			background: url(http://slodive.com/wp-content/uploads/2012/09/plain-backgrounds/moon-plain-background.jpg) no-repeat top left;
+			background-size: contain;
+		}
 		@media  (min-width: 800px) {
 			
 			Menu { width: 250px; }
@@ -139,9 +151,10 @@
 			width: 50px;
 			height: 50px;
 			border: 1px solid #4898AC;
-			background: white;
+			background: rgba(255,255,255,0.2);
 			margin: 3px;
 		}
+		
 		ScrollPane {
 			position: relative;
 			display: block;
@@ -152,12 +165,7 @@
 				display: block;
 				/*overflow: visible;*/
 			}
-				header ~ PageView pane {
-					margin-top: 50px;
-				}
-				header ~ PageView Page ScrollBar[vertical] {
-					margin-top: 50px;
-				}
+				
 			/*ScrollPane*/ scrollbar {
 				display: block;
 				position: absolute;
@@ -191,7 +199,7 @@
 	
 	
 
-	<WebApp id="app" onInitialize="this.coucou(event, this.tagName)">
+	<WebApp id="app" onInitialize="console.log(event, this.tagName)">
 		
 		<Menu id="pageMenu" class="close" side="left">
 			<header>
@@ -264,6 +272,8 @@
 				<h2 class="title">Settings</h2>
 			</header>
 			<ul>
+				<li class="title">Header</li>
+				<li onClick="appHeader.attributes.overlay ? appHeader.removeAttribute('overlay') : appHeader.setAttribute('overlay',''); app.layout();">Overlay</li>
 				<li class="title">Themes</li>
 				<li onClick="app.switchTheme(this.innerText)">citypical</li>
 				<li onClick="app.switchTheme(this.innerText)">citypical2</li>
@@ -272,6 +282,13 @@
 				<li onClick="app.switchTheme(this.innerText)">CartaGen</li>
 				<li onClick="app.switchTheme(this.innerText)">Magnetronics</li>
 				<li onClick="app.switchTheme(this.innerText)">Pixel</li>
+				<li class="title">Header collapse effects</li>
+				<li onClick="app.switchEffect(this.innerText)">up</li>
+				<li onClick="app.switchEffect(this.innerText)">turn-up</li>
+				<li onClick="app.switchEffect(this.innerText)">turn-down</li>
+				<li onClick="app.switchEffect(this.innerText)">3d-roll-down</li>
+				<li onClick="app.switchEffect(this.innerText)">3d-roll-up</li>
+				<li onClick="app.switchEffect(this.innerText)">3d-fall</li>
 				<li class="title">Effects</li>
 				<li>Menu-Effect</li>
 			</ul>
@@ -279,41 +296,46 @@
 		
 		<script type="text/javascript/local">
 			
-			this.coucou = function(e, tag)
-			{
-				console.log('onInitialize > coucou on ' + tag);
-			}
 			this.switchTheme = function( name )
 			{
 				// debugger;
 				$('link[href^="./themes"]').prop('disabled', true);
 				$('link[href="./themes/'+name+'.css"]').prop('disabled', false);
 			}
+			
+			this.switchEffect = function( name )
+			{
+				// debugger;
+				$('link[href$=".fx.css"]').prop('disabled', true);
+				$('link[href$=".'+name+'.fx.css"]').prop('disabled', false);
+			}
+			
 		</script>
 		
-		<header followPageScroll="{page1}">
+		<header id="appHeader" overlay collapseOnScroll="{mainPageView.currentPage}">
+			
 			<span class="icon icon-layout"  title="Menu" 
-				  onClick="app.toggleMenu($('#pageMenu'))"></span>
+				  onClick="app.toggleMenu($(pageMenu))"></span>
 			
 			<h1 class="title">AppKit - demo<span id="testName"></span></h1>
 			
 			<span class="version">version: 0.1.15</span>
-			<span class="icon-cog" onClick="app.toggleMenu($('#settingsMenu'))" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>
+			<span class="icon-cog" onClick="app.toggleMenu($(settingsMenu))" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>
 			<!--<span class="icon-cancel3" onClick="window.close()" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>-->
 			
 		</header>
 
-		<PageView selectedIndex="0">
+		<PageView id="mainPageView" selectedIndex="0">
 			
 			<Page id="page1" snapAxis="false">
-				<img src="http://www.zapalagroup.com/wp-content/uploads/2014/08/o-HAPPY-PEOPLE-facebook.jpg"/>
+				<!--<img src="http://www.zapalagroup.com/wp-content/uploads/2014/08/o-HAPPY-PEOPLE-facebook.jpg"/>-->
 				<!--<ScrollPane style="width:100%;height:100%">-->
 					<Square>
 						<script type="text/javascript/local">
 							setTimeout((function(){
 								var parent = this.parentNode, last;
-								for( var i = 0, il = 20; i < il; i++ )
-									for( var j = 0, jl = 20; j < jl; j++ )
+								for( var i = 0, il = 200; i < il; i++ )
+									for( var j = 0, jl = 8; j < jl; j++ )
 										parent.appendChild(
 											(last = 	$( this.cloneNode() )
 														.css({
@@ -323,17 +345,28 @@
 											)[0]
 										);
 								parent.removeChild( this );
-								// $( parent ).width( $(last).position().left + 53 );
-								// $( parent ).height( $(last).position().top + 53 );
+								$( parent ).width( $(last).position().left + 53 );
+								$( parent ).height( $(last).position().top + 53 );
 							}).bind(this), 3000 )
 						</script>
 					</Square>
 				<!--</ScrollPane>-->
 			</Page>
-			<Page>Page 1</Page>
-			<Page>Page 2</Page>
+			<Page id="page2">
+				
+				<h2>Page 2</h2>
+				
+				<div id="lipsum">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum, purus vel malesuada aliquet, lorem felis mollis nisl, mattis fringilla ipsum lectus ut justo. Sed lacus velit, suscipit a finibus ac, molestie eget sem. Duis vel congue est. Mauris eget varius nisl, a malesuada tellus. Donec feugiat quam non lacus molestie tempus. In diam ligula, luctus aliquet sapien sit amet, vehicula efficitur mauris. Vestibulum finibus a turpis ut ultrices. Aenean nec nisi felis. Maecenas lobortis consectetur iaculis.</p>
+					<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In eleifend ac mi pulvinar sagittis. Nullam ultrices interdum semper. Proin metus arcu, blandit vel hendrerit at, tincidunt nec leo. Phasellus tempor posuere pulvinar. Ut scelerisque a justo sed viverra. Donec luctus urna id nisl varius, vitae volutpat nunc aliquam. Etiam sed tincidunt eros. Vivamus tempus nunc sit amet sapien facilisis, sollicitudin maximus est commodo. Ut maximus, augue laoreet lacinia sagittis, magna nibh fermentum nunc, ac laoreet sem leo a risus. Ut finibus hendrerit orci nec scelerisque. Vestibulum hendrerit purus ac ultrices sollicitudin.</p>
+					<p>Praesent fermentum, felis et feugiat mattis, dolor ipsum accumsan arcu, vel laoreet magna ante ut mauris. Maecenas dignissim elit vel metus varius, eget scelerisque mi efficitur. Proin maximus euismod aliquam. Nunc vehicula accumsan turpis, sit amet efficitur urna dictum sed. Aliquam suscipit, dolor quis ullamcorper suscipit, arcu massa auctor lectus, at consectetur magna velit sed lorem. Sed ullamcorper aliquam metus, eu tincidunt dolor facilisis sed. Quisque ipsum mauris, ultricies nec placerat vitae, aliquam non augue. Quisque varius turpis quam, eu rhoncus orci tempor et. Etiam quis vestibulum mauris, et consequat mi.</p>
+					<p>Maecenas risus purus, placerat vel porta mattis, pulvinar vitae urna. Duis risus massa, tempus feugiat faucibus sit amet, suscipit nec elit. Sed rhoncus sit amet erat in tincidunt. Maecenas volutpat lacus eget quam vestibulum, ut scelerisque turpis rutrum. Integer orci purus, euismod in interdum quis, congue ac lorem. Vivamus ut libero eu augue dapibus auctor. Aliquam egestas massa et velit semper, eget congue urna aliquam.</p>
+					<p>Aenean ultricies, massa sed egestas placerat, urna lectus laoreet est, porttitor bibendum neque orci a nunc. Integer sed nulla mauris. Quisque id felis tortor. Donec a ipsum nec dolor consectetur consectetur. Maecenas et metus ut ante pulvinar placerat sed eu mi. Vestibulum ac hendrerit erat, nec porta odio. Proin vitae nibh non odio hendrerit mattis sit amet ac est. Curabitur condimentum pharetra varius. Nulla sit amet risus nisi. Integer tempus ante ipsum, at convallis dolor mattis vitae. Vivamus dignissim dui felis, ac consequat enim pharetra ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer at pulvinar nibh, id varius sapien. Praesent egestas ultrices risus et tempor. Maecenas porttitor efficitur nisi sed sagittis.</p>
+				</div>
+			</Page>
 			<Page>Page 3</Page>
 			<Page>Page 4</Page>
+			<Page>Page 5</Page>
 			
 		</PageView>
 	</WebApp>

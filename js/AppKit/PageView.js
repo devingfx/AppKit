@@ -19,8 +19,8 @@ var PageView = NodeClass.extend({
 		// setHeaderIcon(this.pages[idx].id); TODO launch page displayed event
 		
 		//Display the first page
-		this.pages.length && this.pages[this.selectedIndex] && $(this.pages[this.selectedIndex]).css('visibility', 'visible');
-
+		this.pages.length && (this.currentPage = this.pages[this.selectedIndex]) && $(this.currentPage).css('visibility', 'visible');
+		
 		//console.emit(/instance/, 'groupEnd');
 		console.html('<groupEnd level="instance"/>');
 	},
@@ -57,7 +57,8 @@ var PageView = NodeClass.extend({
 		//	this.$tabbar.find('ul').append($li);
 	},
 
-	currentPage: null,
+	currentPageID: -1,
+	
 	goToPage: function( pageID )
 	{
 		var _this = this;
@@ -67,7 +68,7 @@ var PageView = NodeClass.extend({
 		}
 		if( this.pages.length > pageID )
 		{
-			var direction = _this.currentPage <= pageID,
+			var direction = _this.currentPageID <= pageID,
 				//oldPage = this.pages[pageID - 1],
 				page = this.pages[pageID]/*,
 				left = {transform:"translateX(-185px)"},
@@ -78,7 +79,8 @@ var PageView = NodeClass.extend({
 			
 			// this.updateHeaderLayout(pageID);
 
-			_this.currentPage = pageID;
+			_this.currentPageID = pageID;
+			_this.currentPage = page;
 			this.dispatchEvent( 
 								(e = new Event('pageDisplayed'),
 								e.page = page,

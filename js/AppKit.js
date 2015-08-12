@@ -1,3 +1,5 @@
+!console.html && (console.html = function(){});
+
 /**
  * Executes <script> tag with type="text/javascript/local" in context of parentNode
  */
@@ -32,16 +34,24 @@ function localScript(root)
 }( jQuery ));
 
 var AppKitClass = NodeClass.extend({
+	
 	responsizes: [],
 	manifest: {},
 	//debug: false,
+	
 	construct: function AppKitClass()
 	{
+		this._super();
 		
 	},
+	
 	preinitialize: function()
 	{
+		if( this._preinitialized ) return;
+		this._preinitialized = true;
+		
 		this._super();
+		
 		var manifest = this.attributes.manifest ? this.attributes.manifest.value : this.innerHTML;
 		
 		//try{
@@ -70,14 +80,16 @@ var AppKitClass = NodeClass.extend({
 			$('html').addClass('desktop');
 		
 		// $('html').trigger('preinitialize');
-		this.dispatchEvent(new Event('preinitialize'));
+		// this.dispatchEvent(new Event('preinitialize'));
 		document.getElementsByTagName('html')[0].dispatchEvent(new Event('preinitialize'));
 	},
 	
 	initialize: function()
 	{
+		if( this._initialized ) return;
 		this._super();
-		this.dispatchEvent(new Event('initialize'));
+		// this.dispatchEvent(new Event('initialize'));
+		
 		document.getElementsByTagName('html')[0].dispatchEvent(new Event('initialize'));
 	}
 });
@@ -92,6 +104,7 @@ var AppKitClass = NodeClass.extend({
 	
 	// On document ready launch preinitialize chain
 	$( AppKit.preinitialize.bind(AppKit) );
+	
 	// On window load launch initialize chain
 	window.addEventListener( 'load', AppKit.initialize.bind( AppKit ) );
 })();

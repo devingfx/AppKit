@@ -19,6 +19,8 @@ var ScrollPane = NodeClass.extend({
 		this.$verticalScrollbar = $('<scrollbar vertical><indicator></scrollbar>');
 		this.$verticalScrollbar._indicator = {
 			el: this.$verticalScrollbar[0],
+			listenX: false,
+			listenY: true,
 			fade: true,
 			resize: true,
 			shrink: 'clip'
@@ -26,6 +28,8 @@ var ScrollPane = NodeClass.extend({
 		this.$horizontalScrollbar = $('<scrollbar horizontal><indicator></scrollbar>');
 		this.$horizontalScrollbar._indicator = {
 			el: this.$horizontalScrollbar[0],
+			listenX: true,
+			listenY: false,
 			fade: true,
 			resize: true,
 			shrink: 'clip'
@@ -36,6 +40,7 @@ var ScrollPane = NodeClass.extend({
 		this._iScroll = new IScroll( this, {
 			scrollY: true,
 			scrollX: true,
+			probeType: 3,
 			// freeScroll: true,
 			mouseWheel: true,
 			// scrollbars: true,
