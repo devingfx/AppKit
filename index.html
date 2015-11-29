@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
-
+	<!-- ChromeOS util: opening from Files app reloads the page but with http://localhost -->
+	<script src="//localhost:8080/launch-app.js" path="dev/AppKit/0.1/app/index.html"></script>
+	
 <head>
-	<title>AppKit scafolder</title>
+	
+	<title>AppKit Demo</title>
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -57,9 +60,11 @@
 	<script src="./js/bindings.js"></script>
 	<!--<script src="./js/repeaters.js"></script>-->
 	
-	<!--<script src="./js/console.emit.js" keep="true"-->
-	<!--    	level="hello instance initialize event THREEElement NodeClass WebApp Page PageView Menu Jilex"></script>-->
+	    	<!--level="hello instance initialize event NodeClass WebApp Page PageView Menu Jilex"></script>-->
+	<!--<script src="./js/console.emit.js" -->
+	<!--    	level="instance initialize event NodeClass WebApp Page PageView Menu Jilex"></script>-->
 	<!--<link rel="stylesheet" href="./css/console.css" />-->
+	<!--<script>String.prototype.collapsed = ''</script>-->
 
 	<script src="./js/AppKit/Class.js"></script>
 	<script src="./js/AppKit/EventDispatcher.js"></script>
@@ -329,28 +334,27 @@
 			
 			<Page id="page1" snapAxis="false">
 				<!--<img src="http://www.zapalagroup.com/wp-content/uploads/2014/08/o-HAPPY-PEOPLE-facebook.jpg"/>-->
-				<!--<ScrollPane style="width:100%;height:100%">-->
-					<Square>
-						<script type="text/javascript/local">
-							setTimeout((function(){
-								var parent = this.parentNode, last;
-								for( var i = 0, il = 200; i < il; i++ )
-									for( var j = 0, jl = 8; j < jl; j++ )
-										parent.appendChild(
-											(last = 	$( this.cloneNode() )
-														.css({
-															top: 53 * i,
-															left: 53 * j
-														})
-											)[0]
-										);
-								parent.removeChild( this );
-								$( parent ).width( $(last).position().left + 53 );
-								$( parent ).height( $(last).position().top + 53 );
-							}).bind(this), 3000 )
-						</script>
-					</Square>
-				<!--</ScrollPane>-->
+				<Square>
+					<script type="text/javascript/local">
+						setTimeout((function(){
+							var parent = this.parentNode, last;
+							for( var i = 0, il = 200; i < il; i++ )
+								for( var j = 0, jl = 8; j < jl; j++ )
+									parent.appendChild(
+										(last = 	$( this.cloneNode() )
+													.css({
+														top: 53 * i,
+														left: 53 * j
+													})
+										)[0]
+									);
+							parent.removeChild( this );
+							$( parent ).width( $(last).position().left + 53 );
+							$( parent ).height( $(last).position().top + 53 );
+						}).bind(this), 3000 )
+					</script>
+				</Square>
+				
 			</Page>
 			<Page id="page2">
 				
@@ -364,7 +368,9 @@
 					<p>Aenean ultricies, massa sed egestas placerat, urna lectus laoreet est, porttitor bibendum neque orci a nunc. Integer sed nulla mauris. Quisque id felis tortor. Donec a ipsum nec dolor consectetur consectetur. Maecenas et metus ut ante pulvinar placerat sed eu mi. Vestibulum ac hendrerit erat, nec porta odio. Proin vitae nibh non odio hendrerit mattis sit amet ac est. Curabitur condimentum pharetra varius. Nulla sit amet risus nisi. Integer tempus ante ipsum, at convallis dolor mattis vitae. Vivamus dignissim dui felis, ac consequat enim pharetra ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer at pulvinar nibh, id varius sapien. Praesent egestas ultrices risus et tempor. Maecenas porttitor efficitur nisi sed sagittis.</p>
 				</div>
 			</Page>
-			<Page>Page 3</Page>
+			<Page>Page 3
+				<h2>Page 3</h2>
+			</Page>
 			<Page>Page 4</Page>
 			<Page>Page 5</Page>
 			

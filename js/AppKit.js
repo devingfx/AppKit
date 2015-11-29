@@ -13,7 +13,7 @@ function localScript(root)
 			this.executed = true;
 			//console.emit(/instance/, 'info', 'Executing local script', this);
 			console.html('<info level="instance">Executing local script</info>')
-			eval('(function(){' + this.innerHTML +'})').call(this.parentNode);
+			eval('(function(){\n' + this.innerHTML +'\n})').call(this.parentNode);
 		}
 	});
 }

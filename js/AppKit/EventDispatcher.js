@@ -1,20 +1,22 @@
-var BaseEvent = function(type, bubbles, cancelable)
-{
-	if(typeof type == 'undefined' || type == null || type == "")
-		throw new Error("type is required!");
-	this.type = type;
-	this.bubbles = typeof bubbles == 'undefined' ? false : bubbles;
-	this.cancelable = typeof cancelable == 'undefined' ? false : cancelable;
-	this.cancelBubble = false;
-	this.clipboardData = undefined;
-	this.currentTarget = null;
-	this.defaultPrevented = false;
-	this.eventPhase = 0;
-	this.returnValue = true;
-	this.srcElement = null;
-	this.target = null;
-	this.timeStamp = new Date().getTime();
-}
+var BaseEvent = Class.extend({
+	construct: function( type, bubbles, cancelable )
+	{
+		if(typeof type == 'undefined' || type == null || type == "")
+			throw new Error("type is required!");
+		this.type = type;
+		this.bubbles = typeof bubbles == 'undefined' ? false : bubbles;
+		this.cancelable = typeof cancelable == 'undefined' ? false : cancelable;
+		this.cancelBubble = false;
+		this.clipboardData = undefined;
+		this.currentTarget = null;
+		this.defaultPrevented = false;
+		this.eventPhase = 0;
+		this.returnValue = true;
+		this.srcElement = null;
+		this.target = null;
+		this.timeStamp = new Date().getTime();
+	}
+});
 
 console.html && (
 	console.html.event = function( node, data )
@@ -29,9 +31,11 @@ console.html && (
 		span.className = 'event' + cls;
 		node.nextSibling ? node.parentNode.insertBefore( span, node.nextSibling ) : node.parentNode.appendChild( span );
 	}
-)
+);
+
+
 var EventDispatcher = Class.extend({
-	construct: function EventDispatcher(obj)
+	construct: function( obj )
 	{
 		/*
 		console.emit(/instance/, 'group', 'Class %cEventDispatcher%c inherits:', ''.CORE, '');
@@ -39,7 +43,7 @@ var EventDispatcher = Class.extend({
 		console.emit(/instance/, 'groupEnd');
 		*/
 		//console.html('<group level="instance" c="event"><span c="icon instance">.</span>Class <span c="core class">EventDispatcher</span> inherits:</group>');
-		console.html('<group level="instance" c="instance"><span c="icon instance">.</span>Class <span c="core class">EventDispatcher</span> inherits:</group>');
+		console.html && console.html('<group level="instance" c="instance"><span c="icon instance">.</span>Class <span c="core class">EventDispatcher</span> inherits:</group>');
 		
 		
 		//console.html('<log level="instance">Class <span c="core class">Class</span></log>');
@@ -58,13 +62,13 @@ var EventDispatcher = Class.extend({
 							''.EVENT,
 							''.EVENT_TYPE, '',
 							this);*/
-				console.html('<group collapsed level="event" file><event c="'+obj.constructor.name+'" type="'+type+'" icon="listen">target</event></group>', {target: this});
+				console.html && console.html('<group collapsed level="event" file><event c="'+obj.constructor.name+'" type="'+type+'" icon="listen">target</event></group>', {target: this});
 				
 				this._listeners[type] = this._listeners[type] || [];
 				this._listeners[type].push( handler );
 				_addEventListener && _addEventListener( type, handler, bubble );
 				
-				console.html('<groupEnd level="event"/>');
+				console.html && console.html('<groupEnd level="event"/>');
 				return this;
 			};
 			
@@ -77,7 +81,7 @@ var EventDispatcher = Class.extend({
 				_removeEventListener && _removeEventListener( type, handler, bubble );
 				return this;
 			};
-
+	
 			var _dispatchEvent = obj.dispatchEvent && obj.dispatchEvent.bind( obj );
 			obj.dispatchEvent = obj.fire = function(evt)
 			{
@@ -88,8 +92,8 @@ var EventDispatcher = Class.extend({
 							''.EVENT_TYPE, '',
 							this, evt);*/
 				if( !(evt.type == 'childAdded' && evt.child.nodeType == 3) )
-					console.html('<group collased level="event.*'+obj.constructor.name+'" file><event c="'+obj.constructor.name+'" type="'+evt.type+'" icon="emit">target</event><br/><o>e</o></group>', {target: this, e: evt});
-
+					console.html && console.html('<group collased level="event.*'+obj.constructor.name+'" file><event c="'+obj.constructor.name+'" type="'+evt.type+'" icon="emit">target</event><br/><o>e</o></group>', {target: this, e: evt});
+	
 				if( isDOM )
 				{
 					_dispatchEvent( evt );
@@ -105,13 +109,13 @@ var EventDispatcher = Class.extend({
 						for(var i = 0, listener; listener = this._listeners[evt.type][i]; i++)
 							listener(evt);
 				}
-
+	
 				if( !(evt.type == 'childAdded' && evt.child.nodeType == 3) )
-					console.html('<groupEnd level="event"/>');
+					console.html && console.html('<groupEnd level="event"/>');
 				return this;
 			}
 		}
-
-		console.html('<groupEnd level="instance"/>');
+	
+		console.html && console.html('<groupEnd level="instance"/>');
 	}
 });
