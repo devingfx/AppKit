@@ -1,0 +1,33 @@
+{
+  "name": "AppKit",
+  "version": "0.5.0",
+  "description": "AppKit is a set of Web Components to rapidly prototype applications in javascript.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "web",
+    "components",
+    "adobe",
+    "apache",
+    "flex",
+    "xhtml2",
+    "js",
+    "javascript",
+    "xml",
+    "MVC"
+  ],
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "should": "^7.1.0"
+  },
+  "author": "Di Grégorio Thomas"
+}
