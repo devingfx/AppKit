@@ -29,10 +29,8 @@ var Window = ak.Window = class Window extends ak.NodeClass {
 		// Click anywhere in app to close settings menu
 		this.addEventListener('click', function( e )
 		{
-			if( e.target != _this.$header.find('#showLeft')[0]
-			 && e.target != _this.$header.find('.H_C_menu')[0]
-			 && e.target != $('#toolbar-button')[0]
-			 && !$(e.target).parents('Menu').length )
+			if( e.target == this )
+			 //&& !$(e.target).parents('Menu').length )
 			{
 				_this.toggleMenu(null, true);
 			}
