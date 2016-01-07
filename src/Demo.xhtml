@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ak:Window xmlns="http://www.w3.org/1999/xhtml"
+		   xmlns:svg="http://www.w3.org/2000/svg" 
+		   xmlns:xlink="http://www.w3.org/1999/xlink"
+		   xmlns:ak="ak.*"
+		   xmlns:jx="http://ns.devingfx.com/jxml/2015"
+		   xmlns:js="data.*"
+		   xmlns:gfx="themes.*"
+		   xmlns:scroll="scroll.*"
+		   xmlns:local="*"
+		   
+		   manifest="example.appcache"
+		   id="app">
+	
+	<!--<ak:title>loading ...</ak:title>-->
+	
+	<!-- ChromeOS util: opening from Files app reloads the page but with http://localhost -->
+	<script src="http://localhost:8080/launch-app.js" path="dev/Jilex Framework/tests/2) jilex-classes/index.xhtml"></script>
+	
+	
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+	
+	<style>
+    	@namespace url(http://www.w3.org/1999/xhtml);
+		@namespace jx url(http://ns.devingfx.com/jxml/2015);
+    	@namespace ak url(ak.*);
+    	@namespace local url(*);
+		
+		html, body {
+			background: transparent;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	<style>
+		/*@import url(../../dist/core.css);*/
+		
+    	@namespace url(http://www.w3.org/1999/xhtml);
+		@namespace jx url(http://ns.devingfx.com/jxml/2015);
+    	@namespace js url(data.*);
+    	@namespace gfx url(themes.*);
+    	@namespace local url(*);
+		
+		html, body {
+			background: transparent;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		
+		jx|Button {
+			display: inline-block;
+			background: #8A2BE2;
+			padding: 5px 10px;
+			color: #FFF;
+			font-family: sans-serif;
+			border-radius: 4px;
+			box-shadow: 0 2px 7px #8A2BE2;
+			text-shadow: 0 1px 0 black;
+		}
+		jx|Button:before {
+			content: attr(label);
+		}
+		
+		/*local|Button,*/
+		js|* { display: none; }
+	</style>
+	
+	
+	<!--TODO: get rid of jquery dependency -->
+	<script src="http://localhost:8080/dev/Jilex Framework/bower_components/jquery/dist/jquery.min.js"></script>
+	
+	<!--<script src="http://ns.devingfx.com/jxml/2015/namespace.js"></script>-->
+	<script src="http://localhost:8080/dev/Jilex%20Framework/dist/jilex-classes.src.js"
+			debug="true" 
+			loadHttpNs="false"
+			recreateQNodes="false"
+			implementStyles="true" 
+			useShadowDOM="true"
+			extendHTMLElements="true">
+	</script>
+	
+	<script src="./libs/iScroll5/iscroll-probe.js"></script>
+	<script src="../dist/AppKit-namespace.src.js"></script>
+	
+	<!--Not parsed as xhtml but html-->
+	<!--<link rel="import" href="./ak/Window.xhtml"/>-->
+	<!--<link rel="import" href="./ak/WebApp.xml"/>-->
+	
+	
+	
+	
+	<link rel="stylesheet" href="./css/reset.css"/>
+	
+	<link rel="stylesheet" href="./css/core.css"/>
+	<link rel="stylesheet" href="./ak/Window.css"/>
+	<!--<link rel="stylesheet" href="./css/WebApp.css"/>-->
+	<link rel="stylesheet" href="./ak/Menu.css"/>
+	<link rel="stylesheet" href="./css/PageView.css"/>
+	<link rel="stylesheet" href="./css/Page.css"/>
+	
+	<link rel="stylesheet" href="./img/appkit-icons/style.css" />
+	
+	<!--<link rel="stylesheet" href="./themes/Minimal.css" disabled="disabled"/>-->
+	<link rel="stylesheet" href="./ak/themes/OpenSans.css"/>
+	<link rel="stylesheet" href="./ak/themes/Minimal.css" disabled="disabled"/>
+	<link rel="stylesheet" href="./ak/themes/Menu-Effect.css" disabled="disabled"/>
+	
+	<!--<link rel="stylesheet" href="./themes/oBox.css"/>-->
+	<link rel="stylesheet" href="./ak/themes/oBox.css"/>
+	
+	
+	<link rel="stylesheet" href="./effects/WebAppHeader.up.fx.css"/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.turn-up.fx.css" disabled="disabled"/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.turn-down.fx.css" disabled="disabled"/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.3d-roll-down.fx.css" disabled="disabled"/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.3d-roll-up.fx.css" disabled="disabled"/>
+	<link rel="stylesheet" href="./effects/WebAppHeader.3d-fall.fx.css" disabled="disabled"/>
+	
+	
+	<!--<style sass themeColor="#6F0">-->
+	<!--	WebApp {-->
+	<!--		background: $themecolor;-->
+	<!--		border: 4px solid red;-->
+	<!--	}-->
+	<!--</style>-->
+	<style>
+		.icon { font-size: 34px; }
+		
+		Page {
+			padding: 0px;
+			overflow: hidden;
+			/*font-size: 48px;*/
+		}
+		Page:nth-child(2) pane {
+			background: url(http://slodive.com/wp-content/uploads/2012/09/plain-backgrounds/moon-plain-background.jpg) no-repeat top left;
+			background-size: contain;
+		}
+		@media  (min-width: 800px) {
+			
+			Menu { width: 250px; }
+		/*	Menu { width: 25%; }*/
+		/*	Menu.close {*/
+		/*		width: 25%;*/
+		/*		transform: translate(0);*/
+		/*	}*/
+			WebApp {
+		/*		width: 75%;*/
+				left: 0;
+				right: 0;
+				width: auto;
+				transition: all 0.3s ease-out;
+			}
+				WebApp.leftMenuOpen {
+					left: 250px;
+					transform: none;
+				}
+				WebApp.rightMenuOpen {
+					right: 250px;
+					transform: none;
+				}
+		/*		WebApp.leftMenuOpen, WebApp.rightMenuOpen {*/
+		/*			transform: translateX(0);*/
+		/*		}*/
+					WebApp.leftMenuOpen:after, WebApp.rightMenuOpen:after {
+						pointer-events: none;
+						opacity: 0;
+					}
+		 
+		}
+		
+		.version {
+			color: white;
+			float: right;
+			padding-top: 10px;
+			padding-right: 40px;
+			-webkit-app-region: no-drag;
+		}
+		
+		Square {
+			display: block;
+			position: absolute;
+			width: 50px;
+			height: 50px;
+			border: 1px solid #4898AC;
+			background: rgba(255,255,255,0.2);
+			margin: 3px;
+		}
+		
+		ScrollPane {
+			position: relative;
+			display: block;
+			overflow: hidden;
+			
+		}
+			pane {
+				display: block;
+				/*overflow: visible;*/
+			}
+				
+			/*ScrollPane*/ scrollbar {
+				display: block;
+				position: absolute;
+				z-index: 9999;
+				overflow: hidden;
+			}
+				/*ScrollPane*/ scrollbar[vertical] {
+					bottom: 8px;
+					width: 7px;
+					top: 1px;
+					right: 1px;
+				}
+				/*ScrollPane*/ scrollbar[horizontal] {
+					bottom: 1px;
+					left: 1px;
+					right: 1px;
+					height: 7px;
+				}
+				/*ScrollPane*/ scrollbar[vertical] +
+				/*ScrollPane*/ scrollbar[horizontal] {
+					right: 8px;
+				}
+				
+				
+			
+	</style>
+	
+	
+	
+	
+	
+
+	<!-- document.querySelectoNSAll('k|#pageMenu') -->
+	<ak:Menu id="pageMenu" class="close" side="left">
+		<header>
+			<h2 class="title">Choose an exemple</h2>
+		</header>
+		<ul horizontalScrollPolicy="off">
+			<li onClick="app.$pageView[0].goToPage(0)">Squares</li>
+			<li onClick="app.$pageView[0].goToPage(1)">Page 1</li>
+			<li onClick="app.$pageView[0].goToPage(2)">Page 2</li>
+			<li onClick="app.$pageView[0].goToPage(3)">Page 3</li>
+			<li onClick="app.$pageView[0].goToPage(4)">Page 4</li>
+			<li class="title">Title (8)</li>
+			<li>Item 1</li>	
+			<li>Item 2</li>
+			<li>Item 3</li>
+			<li>Item 4</li>
+			<li>Item 5</li>
+			<li>Item 6</li>
+			<li>Item 7</li>
+			<li>Item 8</li>
+			<li class="title">Title (6)</li>
+			<li>Item 1</li>
+			<li>Item 2</li>
+			<li>Item 3</li>
+			<li>Item 4</li>
+			<li>Item 5</li>
+			<li>Item 6</li>
+		</ul>
+	</ak:Menu>
+	
+	<ak:Menu id="nestedMenu" class="close" side="left">
+		<header>
+			<h2 class="title">Choose a level</h2>
+		</header>
+		<!--<PageView selectedIndex="0">-->
+			
+		<!--	<Page style="background: #FFF;">-->
+				<ul>
+		<!--			<li>Item 1</li>-->
+		<!--			<li>Item 2</li>-->
+		<!--			<li>Item 3</li>-->
+		<!--			<li>Item 4</li>-->
+		<!--			<li class="title">Title</li>-->
+		<!--			<li>Item 1</li>-->
+		<!--			<li>Item 2</li>-->
+		<!--			<li>Item 3</li>-->
+		<!--			<li>Item 4</li>-->
+		<!--			<li>Item 5</li>-->
+		<!--			<li>Item 6</li>-->
+		<!--			<li>Item 7</li>-->
+		<!--			<li>Item 8</li>-->
+		<!--			<li class="title">Title</li>-->
+		<!--			<li>Item 1</li>-->
+		<!--			<li>Item 2</li>-->
+		<!--			<li>Item 3</li>-->
+		<!--			<li>Item 4</li>-->
+		<!--			<li>Item 5</li>-->
+		<!--			<li>Item 6</li>-->
+		<!--			<li>Item 7</li>-->
+		<!--			<li>Item 8</li>-->
+				</ul>
+		<!--	</Page>-->
+			
+		<!--</PageView>-->
+		
+	</ak:Menu>
+	
+	<ak:Menu id="settingsMenu" class="close" side="right">
+		<header>
+			<h2 class="title">Settings</h2>
+		</header>
+		<ul>
+			<li class="title">Header</li>
+			<li onClick="appHeader.attributes.overlay ? appHeader.removeAttribute('overlay') : appHeader.setAttribute('overlay',''); app.layout();">Overlay</li>
+			<li class="title">Themes</li>
+			<li onClick="app.switchTheme(this.innerText)">citypical</li>
+			<li onClick="app.switchTheme(this.innerText)">citypical2</li>
+			<li onClick="app.switchTheme(this.innerText)">Minimal</li>
+			<li onClick="app.switchTheme(this.innerText)">Blackstic</li>
+			<li onClick="app.switchTheme(this.innerText)">CartaGen</li>
+			<li onClick="app.switchTheme(this.innerText)">Magnetronics</li>
+			<li onClick="app.switchTheme(this.innerText)">Pixel</li>
+			<li class="title">Header collapse effects</li>
+			<li onClick="app.switchEffect(this.innerText)">up</li>
+			<li onClick="app.switchEffect(this.innerText)">turn-up</li>
+			<li onClick="app.switchEffect(this.innerText)">turn-down</li>
+			<li onClick="app.switchEffect(this.innerText)">3d-roll-down</li>
+			<li onClick="app.switchEffect(this.innerText)">3d-roll-up</li>
+			<li onClick="app.switchEffect(this.innerText)">3d-fall</li>
+			<li class="title">Effects</li>
+			<li>Menu-Effect</li>
+		</ul>
+	</ak:Menu>
+	
+	<script type="text/javascript/local">
+		
+		this.switchTheme = function( name )
+		{
+			// debugger;
+			$('link[href^="./themes"]').prop('disabled', true);
+			$('link[href="./themes/'+name+'.css"]').prop('disabled', false);
+		}
+		
+		this.switchEffect = function( name )
+		{
+			// debugger;
+			$('link[href$=".fx.css"]').prop('disabled', true);
+			$('link[href$=".'+name+'.fx.css"]').prop('disabled', false);
+		}
+		
+	</script>
+	
+	<ak:WebAppHeader id="appHeader" overlay="true" collapseOnScroll="{mainPageView.currentPage}">
+		
+		<span class="icon icon-layout"  title="Menu" 
+			  onClick="app.toggleMenu($(pageMenu))"></span>
+		
+		<h1 class="title">AppKit - demo<span id="testName"></span></h1>
+		
+		<span class="version">version: 0.1.15</span>
+		<!--<span class="icon-cog" onClick="app.toggleMenu($(settingsMenu))" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>-->
+		<!--<span class="icon-cancel3" onClick="window.close()" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>-->
+		<svg:svg viewBox="0 0 24 24"
+				 style="fill: white; -webkit-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)); width: 20px; position: absolute; right: 13px; top: 11px; font-size: 24px;"
+				 onclick="root.toggleMenu($('#settingsMenu'))">
+			<svg:use xlink:href="./img/icons.svg#icon_cog"/>
+		</svg:svg>
+		
+		<!--<ak:Icon src="#icon_cog"/>-->
+		<!--<ak:Icon class="#icomoon-cog"/>-->
+	</ak:WebAppHeader>
+
+	<ak:PageView id="mainPageView" selectedIndex="0">
+		
+		<ak:Page id="page1" snapAxis="false">
+			
+			<ak:Button>Coucou monde!</ak:Button>
+			<mx:Button xmlns:mx="http://ns.adobe.com/2006/mxml">Coucou monde!</mx:Button>
+			
+			<!--<img src="http://www.zapalagroup.com/wp-content/uploads/2014/08/o-HAPPY-PEOPLE-facebook.jpg"/>-->
+			<Square>
+				<script type="text/javascript/local">//<![CDATA[
+					setTimeout((function(){
+						var parent = this.parentNode, last;
+						for( var i = 0, il = 200; i < il; i++ )
+							for( var j = 0, jl = 8; j < jl; j++ )
+								parent.appendChild(
+									(last = 	$( this.cloneNode() )
+												.css({
+													top: 53 * i,
+													left: 53 * j
+												})
+									)[0]
+								);
+						parent.removeChild( this );
+						$( parent ).width( $(last).position().left + 53 );
+						$( parent ).height( $(last).position().top + 53 );
+					}).bind(this), 3000 )
+				//]]></script>
+			</Square>
+			
+		</ak:Page>
+		<ak:Page id="page2">
+			
+			<h2>Page 2</h2>
+			
+			<div id="lipsum">
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam rutrum, purus vel malesuada aliquet, lorem felis mollis nisl, mattis fringilla ipsum lectus ut justo. Sed lacus velit, suscipit a finibus ac, molestie eget sem. Duis vel congue est. Mauris eget varius nisl, a malesuada tellus. Donec feugiat quam non lacus molestie tempus. In diam ligula, luctus aliquet sapien sit amet, vehicula efficitur mauris. Vestibulum finibus a turpis ut ultrices. Aenean nec nisi felis. Maecenas lobortis consectetur iaculis.</p>
+				<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In eleifend ac mi pulvinar sagittis. Nullam ultrices interdum semper. Proin metus arcu, blandit vel hendrerit at, tincidunt nec leo. Phasellus tempor posuere pulvinar. Ut scelerisque a justo sed viverra. Donec luctus urna id nisl varius, vitae volutpat nunc aliquam. Etiam sed tincidunt eros. Vivamus tempus nunc sit amet sapien facilisis, sollicitudin maximus est commodo. Ut maximus, augue laoreet lacinia sagittis, magna nibh fermentum nunc, ac laoreet sem leo a risus. Ut finibus hendrerit orci nec scelerisque. Vestibulum hendrerit purus ac ultrices sollicitudin.</p>
+				<p>Praesent fermentum, felis et feugiat mattis, dolor ipsum accumsan arcu, vel laoreet magna ante ut mauris. Maecenas dignissim elit vel metus varius, eget scelerisque mi efficitur. Proin maximus euismod aliquam. Nunc vehicula accumsan turpis, sit amet efficitur urna dictum sed. Aliquam suscipit, dolor quis ullamcorper suscipit, arcu massa auctor lectus, at consectetur magna velit sed lorem. Sed ullamcorper aliquam metus, eu tincidunt dolor facilisis sed. Quisque ipsum mauris, ultricies nec placerat vitae, aliquam non augue. Quisque varius turpis quam, eu rhoncus orci tempor et. Etiam quis vestibulum mauris, et consequat mi.</p>
+				<p>Maecenas risus purus, placerat vel porta mattis, pulvinar vitae urna. Duis risus massa, tempus feugiat faucibus sit amet, suscipit nec elit. Sed rhoncus sit amet erat in tincidunt. Maecenas volutpat lacus eget quam vestibulum, ut scelerisque turpis rutrum. Integer orci purus, euismod in interdum quis, congue ac lorem. Vivamus ut libero eu augue dapibus auctor. Aliquam egestas massa et velit semper, eget congue urna aliquam.</p>
+				<p>Aenean ultricies, massa sed egestas placerat, urna lectus laoreet est, porttitor bibendum neque orci a nunc. Integer sed nulla mauris. Quisque id felis tortor. Donec a ipsum nec dolor consectetur consectetur. Maecenas et metus ut ante pulvinar placerat sed eu mi. Vestibulum ac hendrerit erat, nec porta odio. Proin vitae nibh non odio hendrerit mattis sit amet ac est. Curabitur condimentum pharetra varius. Nulla sit amet risus nisi. Integer tempus ante ipsum, at convallis dolor mattis vitae. Vivamus dignissim dui felis, ac consequat enim pharetra ut. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer at pulvinar nibh, id varius sapien. Praesent egestas ultrices risus et tempor. Maecenas porttitor efficitur nisi sed sagittis.</p>
+			</div>
+		</ak:Page>
+		<ak:Page>Page 3
+			<h2>Page 3</h2>
+			<!-- jQuery UI -->
+			<!--<script>-->
+			<!--	jq = jq || {};-->
+			<!--	jq.accordion = function()-->
+			<!--	{-->
+			<!--		$(this).accordion( this.attributes ).-->
+			<!--	}-->
+				<!--'accordion slider tab'.split(' ').map(function(n)-->
+				<!--{-->
+				<!--	jq[n] = function()-->
+				<!--	{-->
+				<!--		$(this)[n](this.attributes)-->
+				<!--	};-->
+				<!--})-->
+			<!--</script>-->
+			<!--<jq:accordion>-->
+			<!--	<header>First header</header>-->
+			<!--	<panel>First content panel</panel>-->
+				
+			<!--	<header>Second header</header>-->
+			<!--	<panel>Second content panel</panel>-->
+			<!--</jq:accordion>-->
+			
+		</ak:Page>
+		<ak:Page>Page 4</ak:Page>
+		<ak:Page>Page 5</ak:Page>
+		
+	</ak:PageView>
+	
+</ak:Window>

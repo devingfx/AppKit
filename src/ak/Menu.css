@@ -1,0 +1,65 @@
+@namespace ak url(ak.*);
+
+ak|Menu {
+	position: absolute;
+	width: 75%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	
+	/* overflow-y: scroll; */
+	-webkit-transition: all 0.3s ease-out;
+	-webkit-transform-origin-x: 0%;
+}
+ak|Menu[side=left] { right: 100%; }
+ak|Menu[side=right] { left: 100%; }
+
+scroller {
+	display: block;
+	/* overflow-y: scroll; */
+	overflow: scroll;        
+	-webkit-overflow-scrolling: touch;
+}
+ak|Menu[class~=close] {
+	visibility: hidden;
+	transform: translate(50%);
+	-o-transform: translate(50%);
+	-ms-transform: translate(50%);
+	-moz-transform: translate(50%);
+	-webkit-transform: translate(50%);
+}
+	ak|Menu[side=right][class~=close] {
+		transform: translate(-50%);
+		-o-transform: translate(-50%);
+		-ms-transform: translate(-50%);
+		-moz-transform: translate(-50%);
+		-webkit-transform: translate(-50%);
+	}
+	ak|Menu header {
+		
+	}
+		ak|Menu header h2 {
+			margin: 0;
+			padding: 0;
+			display: inline-block;
+			margin: 0;
+			font-size: 20px;
+		}
+	ak|Menu ak|ScrollPane {
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+	}
+	ak|Menu ul {
+		margin: 0;
+		padding: 0;
+	}
+		
+		ak|Menu li {
+			list-style: none;
+			width: 100%;
+			display: block;
+		}
+		ak|Menu li.title {}
+		ak|Menu li.enabled {}
+

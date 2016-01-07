@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		concat: {
 			options: {
-				separator: ';\n',
+				separator: ';\n'
 			},
 			AppKit: {
 				src: [
@@ -22,6 +22,23 @@ module.exports = function(grunt) {
 					'src/js/AppKit.js',
 				],
 				dest: 'dist/AppKit.src.js',
+			},
+			ak: {
+				options: {
+					banner: '"use strict";\nconsole.html=s=>{};\n'
+				},
+				src: [
+					'src/ak/NodeClass.js',
+					'src/ak/ScrollPane.js',
+					'src/ak/Window.js',
+					// 'src/ak/WebApp.js',
+					'src/ak/PageView.js',
+					'src/ak/Page.js',
+					'src/ak/Menu.js',
+					// 'src/libs/sass.sync.js',
+					// 'src/ak/StyleSass.js',
+				],
+				dest: 'dist/AppKit-namespace.src.js',
 			}
 		},
 		
