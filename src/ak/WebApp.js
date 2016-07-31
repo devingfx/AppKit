@@ -9,7 +9,7 @@ var WebApp = ak.WebApp = class WebApp extends ak.NodeClass {
 		//console.emit(/instance/, 'group', 'Class %cWebApp%c instanciated.', ''.APPKIT, '');
 		//console.html('<group level="instance" c="instance"><span c="icon instance">.</span>Class <span c="AppKit class">WebApp</span> inherits:</group>');
 		console.html('<group c="instance"><span level="instance" c="icon instance">.</span>Class <span c="AppKit class">WebApp</span> inherits:</group>');
-		this._super();
+		this.NodeClass();
 		
 		var _this = this;
 		
@@ -19,22 +19,22 @@ var WebApp = ak.WebApp = class WebApp extends ak.NodeClass {
 		});
 		
 		// Select important nodes
-		this.$header = this.$el.find('> header').eq(0);
+		this.$header = this.$('> header')[0];
 		// this.$navMenu = this.$header.find('#menuSlide');
 		// this.$settings = $('#settingsMenu');
-		this.$pageView = $('PageView');
+		this.$pageView = $('PageView')[0];
 		//this.$tabbar = $('<div/>');
 		
 		// Fix body sizes
-		$('body').css({height: 5000});
+		$('body')[0].style.height = 5000 + 'px';
 		window.scrollTo(0,0);
 		this.layout();
 		
 		// Click anywhere in app to close settings menu
 		this.$el[0].addEventListener('click', function(e)
 		{
-			if(e.target != _this.$header.find('#showLeft')[0] &&  
-				e.target != _this.$header.find('.H_C_menu')[0] &&  
+			if(e.target != _this.$header.$('#showLeft')[0] &&  
+				e.target != _this.$header.$('.H_C_menu')[0] &&  
 				e.target != $('#toolbar-button')[0]
 				)
 			{
@@ -49,7 +49,7 @@ var WebApp = ak.WebApp = class WebApp extends ak.NodeClass {
 		this._eventAttribute('preinitialize');
 		this._eventAttribute('initialize');
 		
-		$('html').on('preinitialize', function ()
+		$('html')[0].addEventListener('preinitialize', function ()
 		{
 			_this.preinitialize();
 		});
@@ -66,7 +66,7 @@ var WebApp = ak.WebApp = class WebApp extends ak.NodeClass {
 			// }
 		}, false); */
 		
-		this.$el.triggerHandler('preinitialize');
+		this.dispatchEvent( new Event('preinitialize') );
 		//AppKit.addEventListener('initialized', this.initialize.bind(this) );
 		
 		//console.emit(/instance/, 'groupEnd');
@@ -87,14 +87,16 @@ var WebApp = ak.WebApp = class WebApp extends ak.NodeClass {
 		var _this = this;
 		// Fix body sizes
 		// alert(window.innerHeight);
-		$('body')./*add(this.$el).*/css({width: window.innerWidth, height: window.innerHeight});
+		var $body = $('body')[0];
+		$body.style.width = window.innerWidth + 'px';
+		$body.style.height = window.innerHeight + 'px';
 		// this.$el.css({width: window.innerWidth, height: window.innerHeight});
 
 		// Fix PageView right under the header and good height
-		if( this.$header.attr('overlay') == '' )
-			this.$pageView.css({top: 0});
+		if( this.$header.hasAttribute('overlay') )
+			this.$pageView.style.top = 0;
 		else
-			this.$pageView.css({top: this.$header.outerHeight()});
+			this.$pageView.style.top = this.$header.offsetHeight;
 		// this.$pageView.css({top: this.$header.outerHeight(), height: window.innerHeight - this.$header.outerHeight()});
 	}
 
@@ -122,15 +124,16 @@ var WebApp = ak.WebApp = class WebApp extends ak.NodeClass {
 	
 	toggleMenu($menu)
 	{
-		if(!$menu || this.$el.hasClass('leftMenuOpen') || this.$el.hasClass('rightMenuOpen'))
+		if(!$menu.length || this.classList.contains('leftMenuOpen') || this.classList.contains('rightMenuOpen'))
 		{
-			this.$el.removeClass('leftMenuOpen rightMenuOpen');
-			$('Menu').addClass('close');
+			this.classList.remove('leftMenuOpen','rightMenuOpen');
+			$('Menu').forEach( menu => menu.classList.add('close') );
 		}
-		if($menu)
+		if($menu.length)
 		{
-			this.$el.toggleClass($menu.attr('side') + 'MenuOpen');
-			$menu.toggleClass('close');
+			$menu = $menu[0];
+			this.classList.toggleClass( $menu.getAttribute('side') + 'MenuOpen' );
+			$menu.classList.toggle('close');
 			// $menu[0]._iScroll.refresh();
 		}
 	}

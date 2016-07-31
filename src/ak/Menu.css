@@ -6,10 +6,10 @@ ak|Menu {
 	height: 100%;
 	padding: 0;
 	margin: 0;
-	
 	/* overflow-y: scroll; */
 	-webkit-transition: all 0.3s ease-out;
 	-webkit-transform-origin-x: 0%;
+	overflow: hidden;
 }
 ak|Menu[side=left] { right: 100%; }
 ak|Menu[side=right] { left: 100%; }
@@ -21,12 +21,14 @@ scroller {
 	-webkit-overflow-scrolling: touch;
 }
 ak|Menu[class~=close] {
-	visibility: hidden;
+	/* visibility: hidden; */
 	transform: translate(50%);
 	-o-transform: translate(50%);
 	-ms-transform: translate(50%);
 	-moz-transform: translate(50%);
 	-webkit-transform: translate(50%);
+	opacity: 0;
+	width: 50%;
 }
 	ak|Menu[side=right][class~=close] {
 		transform: translate(-50%);

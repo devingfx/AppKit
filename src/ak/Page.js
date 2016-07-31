@@ -15,35 +15,54 @@ var Page = ak.Page = class Page extends ak.ScrollPane {
 		console.html('<group level="instance" c="instance"><span c="icon instance">.</span>Class <span c="AppKit class">Page</span> inherits:</group>');
 		super.ScrollPane();
 		
-		this.$el.css({display: 'block'});
-		this.__defineGetter__("disabled", function () {
-			return this._disabled;
-		});
-		this.__defineSetter__("disabled", function (val) {
-			// log("setter de coords: " + (val) );
-			this._disabled = val;
-			if(typeof this.$button != "undefined")
-			{
-				if(!val)
-					this.$button.removeClass('disabled');
-				else
-					this.$button.addClass('disabled');
+		this.style.display = 'block';
+// 		this.__defineGetter__("disabled", function () {
+// 			return this._disabled;
+// 		});
+// 		this.__defineSetter__("disabled", function (val) {
+// 			// log("setter de coords: " + (val) );
+// 			this._disabled = val;
+// 			if(typeof this.$button != "undefined")
+// 			{
+// 				if(!val)
+// 					this.$button.removeClass('disabled');
+// 				else
+// 					this.$button.addClass('disabled');
 				
-			}
-		});
+// 			}
+// 		});
 
 		//console.emit(/instance/, 'groupEnd');
 		console.html('<groupEnd level="instance"/>');
 	}
+	
+	get disabled()
+	{
+		return this._disabled;
+	}
+	set disabled( val )
+	{
+			// log("setter de coords: " + (val) );
+		this._disabled = val;
+		if(typeof this.$button != "undefined")
+		{
+			if(!val)
+				this.$button.removeClass('disabled');
+			else
+				this.$button.addClass('disabled');
+
+		}
+	}
+
 
 	show( direction )
 	{
 		direction = typeof direction == 'undefined' ? 1 : direction;
 		
-		if (this._$parent.find('Page').length)
+		if (this._$parent.$('Page').length)
 		{
 			// Get the current shown page(s)
-			var $old = this._$parent.find('Page:visible').not(this.$el);
+			var $old = this._$parent.$('Page:visible').filter( page => page != this.$el );
 			//.filter(":visible")			
 			var _this = this;
 			

@@ -4,7 +4,6 @@ Page {
 	height: 100%;
 	visibility: hidden;
 	overflow-y: scroll;
-	
 	transform: translateX(0);
 	transition: transform 0.3s ease-out;
 }

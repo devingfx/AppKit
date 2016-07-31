@@ -19,10 +19,10 @@ var Window = ak.Window = class Window extends ak.NodeClass {
 		});
 		
 		// Select important nodes
-		this.$header = this.$el.find('WebAppHeader').eq(0);
+		this.$header = this.$('WebAppHeader')[0];
 		// this.$navMenu = this.$header.find('#menuSlide');
 		// this.$settings = $('#settingsMenu');
-		this.$pageView = $('PageView');
+		this.$pageView = document.$('PageView')[0];
 		//this.$tabbar = $('<div/>');
 		
 		
@@ -59,7 +59,7 @@ var Window = ak.Window = class Window extends ak.NodeClass {
 			// }
 		}, false); */
 		
-		this.$el.triggerHandler('preinitialize');
+		this.dispatchEvent( new Event('preinitialize') );
 		//AppKit.addEventListener('initialized', this.initialize.bind(this) );
 		
 		//console.emit(/instance/, 'groupEnd');
@@ -92,10 +92,10 @@ var Window = ak.Window = class Window extends ak.NodeClass {
 		// this.$el.css({width: window.innerWidth, height: window.innerHeight});
 
 		// Fix PageView right under the header and good height
-		if( this.$header.is('[overlay]') )
-			this.$pageView.css({top: 0});
+		if( this.$header.hasAttribute('overlay') )
+			this.$pageView.style.top = 0;
 		else
-			this.$pageView.css({top: this.$header.outerHeight()});
+			this.$pageView.style.top = this.$header.offsetHeight;
 		// this.$pageView.css({top: this.$header.outerHeight(), height: window.innerHeight - this.$header.outerHeight()});
 	}
 
@@ -123,15 +123,15 @@ var Window = ak.Window = class Window extends ak.NodeClass {
 	
 	toggleMenu($menu)
 	{
-		if(!$menu || this.$el.hasClass('leftMenuOpen') || this.$el.hasClass('rightMenuOpen'))
+		if( !$menu || this.classList.contains('leftMenuOpen') || this.classList.contains('rightMenuOpen') )
 		{
-			this.$el.removeClass('leftMenuOpen rightMenuOpen');
-			$('Menu').addClass('close');
+			this.classList.remove('leftMenuOpen','rightMenuOpen');
+			document.$('Menu').forEach( menu => menu.classList.add('close') );
 		}
-		if($menu)
+		if( $menu )
 		{
-			this.$el.toggleClass($menu.attr('side') + 'MenuOpen');
-			$menu.toggleClass('close');
+			this.classList.toggle( $menu.getAttribute('side') + 'MenuOpen' );
+			$menu.classList.toggle('close');
 			// $menu[0]._iScroll.refresh();
 		}
 	}
@@ -185,7 +185,7 @@ var WebAppHeader = ak.WebAppHeader = class WebAppHeader extends NodeClass {
 	onCollapsingScrollMove()
 	{
 		var _this = this,
-	    	h = _this.$el.outerHeight(),
+	    	h = _this.offsetHeight,
 			_iScroll = this.collapseOnScroll._iScroll,
 			delta = _this._scrollStart - _iScroll.y;
 		
@@ -194,8 +194,8 @@ var WebAppHeader = ak.WebAppHeader = class WebAppHeader extends NodeClass {
 			// _this._scrollStart - _iScroll.y;
 			if( Math.abs(delta) > h/2 )
 			{
-				this.$el.addClass( delta >= 0 ? 'collapsed' : 'uncollapsed' )
-						.removeClass( delta >= 0 ? 'uncollapsed' : 'collapsed' );
+				this.classList.add( delta >= 0 ? 'collapsed' : 'uncollapsed' );
+				this.classList.remove( delta >= 0 ? 'uncollapsed' : 'collapsed' );
 				 
 				this._scrollStart = delta >= 0 ? this._scrollStart + h/2 : this._scrollStart - h/2;
 				//this.collapseOnScroll._iScroll.y;

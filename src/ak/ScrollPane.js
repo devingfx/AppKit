@@ -1,57 +1,108 @@
 /**
  * ScrollPane Class
  */
-Package('scroll.*');
-var IScroll = scroll.IScroll = IScroll;
-scroll.Bar = class Bar extends NodeClass { Bar() { super.NodeClass() } };
-scroll.Thumb = class Thumb extends NodeClass { Thumb() { super.NodeClass() } };
+Package('iscroll.*');
+iscroll.IScroll = IScroll;
+iscroll.Bar = class Bar extends NodeClass {
+	
+	constructor( direction )
+	{
+		return new Node('iscroll:Bar').extends( null, direction )
+	}
+	Bar( direction )
+	{
+		super.NodeClass();
+		this.appendChild( new iscroll.Thumb() );
+		this.direction = direction || 'vertical';
+	}
+	get direction()
+	{
+		return this.getAttribute('vertical') ? 'vertical' : 'horizontal'
+	}
+	set direction( v )
+	{
+		if( !this.attributes[v] )
+		{
+			var nonv = v == 'vertical' ? 'horizontal' : 'vertical';
+			this.setAttribute( v, 'true');
+			this.removeAttribute( nonv );
+		}
+	}
+	
+};
+
+iscroll.Thumb = class Thumb extends NodeClass {
+	
+	constructor()
+	{
+		return new Node('iscroll:Thumb').extends()
+	}
+	Thumb()
+	{
+		super.NodeClass()
+	}
+};
 
 Package('ak.*');
-var ScrollPane = ak.ScrollPane = class ScrollPane extends ak.NodeClass {
+var ScrollPane = ak.ScrollPane = class ScrollPane extends Element {
 	
 	// _verticalScrollPolicy: true,
 	// _horizontalScrollPolicy: true,
+	constructor( policy )
+	{
+		var node = new Node('ak:ScrollPane').extends();
+		/vertical|both/g.test( policy ) && 
+			( node.horizontalScrollPolicy = 'off' )
+		/horizontal|both/g.test( policy ) && 
+			( node.verticalScrollPolicy = 'off' )
+		return node;
+	}
 	
 	ScrollPane()
 	{
 		console.html('<group level="instance" c="instance"><span c="icon instance">.</span>Class <span c="AppKit class">ScrollPane</span> inherits:</group>');
-		super.NodeClass();
+		
+		this.Element();
+		this.implementStyle();
 		
 		
-		// var _this = this;
-		$( this.childNodes ).wrapAll('<pane>');
-		this._$pane = this.$el.find('pane');
+		this._$pane = new Node('pane');
+		Array.from( this.childNodes ).map( n => this._$pane.appendChild(n) );
+		// this.childNodes.length && $( this.childNodes ).wrapAll( this._$pane );
+		this.appendChild( this._$pane );
 		
 		// Scrollbars
-		this.$verticalScrollbar = $('<scroll:Bar xmlns:scroll="scroll.*" vertical=""><scroll:Thumb/></scroll:Bar>');
+// 		this.$verticalScrollbar = $('<scroll:Bar xmlns:scroll="scroll.*" vertical=""><scroll:Thumb/></scroll:Bar>');
+		this.$verticalScrollbar = new iscroll.Bar('vertical');
 		this.$verticalScrollbar._indicator = {
-			el: this.$verticalScrollbar[0],
+			el: this.$verticalScrollbar,
 			listenX: false,
 			listenY: true,
 			fade: true,
 			resize: true,
 			shrink: 'clip'
 		};
-		this.$horizontalScrollbar = $('<scroll:Bar xmlns:scroll="scroll.*" horizontal=""><scroll:Thumb/></scroll:Bar>');
+// 		this.$horizontalScrollbar = $('<scroll:Bar xmlns:scroll="scroll.*" horizontal=""><scroll:Thumb/></scroll:Bar>');
+		this.$horizontalScrollbar = new iscroll.Bar('horizontal');
 		this.$horizontalScrollbar._indicator = {
-			el: this.$horizontalScrollbar[0],
+			el: this.$horizontalScrollbar,
 			listenX: true,
 			listenY: false,
 			fade: true,
 			resize: true,
 			shrink: 'clip'
 		};
-		this.$verticalScrollbar[0].extends( Element ).extends().Bar();
-		this.$verticalScrollbar.children()[0].extends( Element ).extends().Thumb();
-		this.$horizontalScrollbar[0].extends( Element ).extends().Bar();
-		this.$horizontalScrollbar.children()[0].extends( Element ).extends().Thumb();
-		this.$el.append( this.$verticalScrollbar );
-		this.$el.append( this.$horizontalScrollbar );
+// 		this.$verticalScrollbar[0].extends();
+// 		this.$verticalScrollbar.children()[0].extends();
+// 		this.$horizontalScrollbar[0].extends();
+// 		this.$horizontalScrollbar.children()[0].extends();
+		this.appendChild( this.$verticalScrollbar );
+		this.appendChild( this.$horizontalScrollbar );
 		
 		this._verticalScrollPolicy = true;
 		this._horizontalScrollPolicy = true;
 		
-		this._iScroll = new IScroll( this, {
+		this._iScroll = new iscroll.IScroll( this, {
 			scrollY: true,
 			scrollX: true,
 			probeType: 3,
@@ -116,17 +167,17 @@ var ScrollPane = ak.ScrollPane = class ScrollPane extends ak.NodeClass {
 			}
 		});
 		
-		window.addEventListener('resize', this._onResize.bind(this)); // executes layout()
+		window.addEventListener('resize', e => this.layout() ); // executes layout()
 		// this._onResize();
+		
+		this.addEventListener('childAdded', e => 
+			this._$pane.appendChild( e.child )
+		);
 		
 		console.html('<groupEnd level="instance"/>');
 	}
 	
-	layout()
-	{
-		this._iScroll.refresh();
-		//console.log(this.$scroller.outerHeight());
-	}
+	
 	
 	// get horizontalScrollPolicy()
 	// {
@@ -168,4 +219,30 @@ var ScrollPane = ak.ScrollPane = class ScrollPane extends ak.NodeClass {
 		this.layout();
 	}
 	
+	appendChild( child )
+	{
+		console.html('<group level="event" file><o>node</o><span c="method">.appendChild(<o>child</o>)</span></group>', {node: this, child: child});
+		
+		super.appendChild( child );
+		// var e = new BaseEvent('childAdded');
+		var e = new CustomEvent('childAdded');
+		e.child = child;
+		
+		/*console.emit(/event/, 'groupCollapsed', 
+						'%cEvent%cchildAdded%c sent by %o\n%o', 
+							''.EVENT,
+							''.EVENT_TYPE,
+							'', 
+							this, child);*/
+		//console.emit(/event/, 'log', e);
+		this.dispatchEvent(e);
+		//console.emit(/event/, 'groupEnd');
+		console.html('<groupEnd level="event"/>');
+	}
+	
+	layout()
+	{
+		this._iScroll.refresh();
+		//console.log(this.$scroller.outerHeight());
+	}
 }

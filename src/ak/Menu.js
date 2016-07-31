@@ -16,16 +16,26 @@ var Menu = ak.Menu = class Menu extends ak.NodeClass {
 		console.html('<group level="instance" c="instance"><span c="icon instance">.</span>Class <span c="AppKit class">Menu</span> inherits:</group>');
 		super.NodeClass();
 		
-		$('body').prepend( this.$el );
+// 		$('body').prepend( this.$el );
 		
-		this.$head = this.$el.find('header').eq(0);
+		this.$head = this.$('header')[0];
 		
-		this.$el.find('ul').wrap('<ak:ScrollPane horizontalScrollPolicy="off"/>');
 		
-		this.$scroller = this.$el.find('ScrollPane');
-		this.$scroller[0].extends( ScrollPane ).ScrollPane();
-		this.$scroller[0].style;
-		this.$scroller[0].style.position = 'absolute';
+		// this.$scroller = new ScrollPane('vertical');
+		this.$scroller = new Node('ak:ScrollPane');
+		this.$scroller.setAttribute( 'horizontalScrollPolicy', 'off' );
+		this.$scroller.extends( ScrollPane );
+		this.$scroller.appendChild( this.$('ul')[0] );
+		this.appendChild( this.$scroller );
+		
+		
+		// this.$scroller = $( new Node('ak:ScrollPane') );
+		// this.$scroller.attr('horizontalScrollPolicy', 'off');
+		// this.$scroller[0].extends( ScrollPane );
+		// this.$el.find('ul').wrap( this.$scroller );
+		
+		this.$scroller.style;
+		this.$scroller.style.position = 'absolute';
 		
 		// this._iScroll = new IScroll(this.$scroller[0], {
 		// 	/* click: true, */
@@ -45,14 +55,13 @@ var Menu = ak.Menu = class Menu extends ak.NodeClass {
 	
 	layout()
 	{
-		if(this.$head.length)
-			this.$scroller.css({
-				top: this.$head.outerHeight(), 
-				left: 0,
-				right: 0,
-				bottom: 0
-			});
-		
+		if(this.$head)
+		{
+			this.$scroller.style.top = this.$head.offsetHeight + 'px';
+			this.$scroller.style.left = 0;
+			this.$scroller.style.right = 0;
+			this.$scroller.style.bottom = 0;
+		}
 		this.$scroller[0]._iScroll.refresh();
 		
 		//console.log(this.$scroller.outerHeight());

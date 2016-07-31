@@ -73,7 +73,7 @@ ak|WebAppHeader {
 		ak|WebAppHeader[overlay] ~ ak|PageView pane {
 			margin-top: 50px;
 		}
-		ak|WebAppHeader[overlay] ~ ak|PageView ak|Page scroll|Bar[vertical] {
+		ak|WebAppHeader[overlay] ~ ak|PageView ak|Page iscroll|Bar[vertical] {
 			margin-top: 50px;
 		}
 	

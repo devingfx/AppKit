@@ -7,16 +7,15 @@
 		   xmlns:jx="http://ns.devingfx.com/jxml/2015"
 		   xmlns:js="data.*"
 		   xmlns:gfx="themes.*"
-		   xmlns:scroll="scroll.*"
+		   xmlns:iscroll="iscroll.*"
 		   xmlns:local="*"
 		   
-		   manifest="example.appcache"
-		   id="app">
+		   id="app" version="0.5.1">
 	
 	<!--<ak:title>loading ...</ak:title>-->
 	
 	<!-- ChromeOS util: opening from Files app reloads the page but with http://localhost -->
-	<script src="http://localhost:8080/launch-app.js" path="dev/Jilex Framework/tests/2) jilex-classes/index.xhtml"></script>
+	<!--<script src="http://localhost:8080/launch-app.js" path="dev/Appkit/src/Demo.xhtml"></script>-->
 	
 	
 	<meta charset="utf-8"/>
@@ -29,6 +28,8 @@
     	@namespace ak url(ak.*);
     	@namespace local url(*);
 		
+		* { transition: all .3s ease-out; }
+		
 		html, body {
 			background: transparent;
 			width: 100%;
@@ -36,6 +37,7 @@
 			margin: 0;
 			padding: 0;
 		}
+		
 	</style>
 	<style>
 		/*@import url(../../dist/core.css);*/
@@ -74,10 +76,11 @@
 	
 	
 	<!--TODO: get rid of jquery dependency -->
-	<script src="http://localhost:8080/dev/Jilex Framework/bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
 	
 	<!--<script src="http://ns.devingfx.com/jxml/2015/namespace.js"></script>-->
-	<script src="http://localhost:8080/dev/Jilex%20Framework/dist/jilex-classes.src.js"
+	<!--<script src="https://devingfx.github.io/Jilex/dist/jilex-classes.src.js"-->
+	<script src="http://localhost:8080/Downloads/dev/Jilex Framework/dist/jilex-classes.src.js"
 			debug="true" 
 			loadHttpNs="false"
 			recreateQNodes="false"
@@ -86,6 +89,10 @@
 			extendHTMLElements="true">
 	</script>
 	
+	<script>
+		"use strict";
+		console.html = s => {};
+	</script>
 	<script src="./libs/iScroll5/iscroll-probe.js"></script>
 	<script src="../dist/AppKit-namespace.src.js"></script>
 	
@@ -233,9 +240,6 @@
 	
 	
 	
-	
-	
-
 	<!-- document.querySelectoNSAll('k|#pageMenu') -->
 	<ak:Menu id="pageMenu" class="close" side="left">
 		<header>
@@ -351,16 +355,16 @@
 	<ak:WebAppHeader id="appHeader" overlay="true" collapseOnScroll="{mainPageView.currentPage}">
 		
 		<span class="icon icon-layout"  title="Menu" 
-			  onClick="app.toggleMenu($(pageMenu))"></span>
+			  onclick="app.toggleMenu( pageMenu )"></span>
 		
 		<h1 class="title">AppKit - demo<span id="testName"></span></h1>
 		
-		<span class="version">version: 0.1.15</span>
+		<span class="version" innerText="version: {app.version}"/>
 		<!--<span class="icon-cog" onClick="app.toggleMenu($(settingsMenu))" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>-->
 		<!--<span class="icon-cancel3" onClick="window.close()" style="position: absolute; right: 13px; top: 11px; font-size: 24px;"></span>-->
 		<svg:svg viewBox="0 0 24 24"
 				 style="fill: white; -webkit-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5)); width: 20px; position: absolute; right: 13px; top: 11px; font-size: 24px;"
-				 onclick="root.toggleMenu($('#settingsMenu'))">
+				 onclick="root.toggleMenu( settingsMenu )">
 			<svg:use xlink:href="./img/icons.svg#icon_cog"/>
 		</svg:svg>
 		

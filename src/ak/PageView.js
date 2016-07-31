@@ -17,13 +17,15 @@ var PageView = ak.PageView = class PageView extends ak.NodeClass {
 		this.pages = [];
 		this.currentPageID = -1;
 		
-		this.$el.css({display: 'block'});
-		this.$el.find('Page').each(function (id, page) { _this.addPage(page); });
+		this.style.display = 'block';
+		this.$('Page').map( page => this.addPage(page) );
 
 		// setHeaderIcon(this.pages[idx].id); TODO launch page displayed event
 		
 		//Display the first page
-		this.pages.length && (this.currentPage = this.pages[this.selectedIndex]) && $(this.currentPage).css('visibility', 'visible');
+		this.pages.length && 
+			(this.currentPage = this.pages[this.selectedIndex]) && 
+				(this.currentPage.style.visibility = 'visible');
 		
 		//console.emit(/instance/, 'groupEnd');
 		console.html('<groupEnd level="instance"/>');
@@ -33,9 +35,9 @@ var PageView = ak.PageView = class PageView extends ak.NodeClass {
 	{
 		var _this = this;
 		var pageID = this.pages.push(page) - 1;
-		page._$parent = this.$el;
+		page._$parent = this;
 		// this.$el.append(page.$el/*.hide()*/);
-		this.appendChild(page);
+		this.appendChild( page );
 		// Header title / button
 		// page.$title = $('<span class="'+page.id+'">'+page.title+'</span>').appendTo(this.$header.find('div'))
 		// 					.bind('click', function()
