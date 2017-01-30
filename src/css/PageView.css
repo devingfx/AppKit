@@ -1,6 +1,7 @@
 PageView {
 	display: block;
 	overflow: hidden;
+	theme-color: #F00;
 }
 WebApp > PageView {
 	position: absolute;

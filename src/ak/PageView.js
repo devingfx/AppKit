@@ -71,12 +71,14 @@ var PageView = ak.PageView = class PageView extends ak.NodeClass {
 		}
 		if( this.pages.length > pageID )
 		{
-			var direction = _this.currentPageID <= pageID,
-				//oldPage = this.pages[pageID - 1],
-				page = this.pages[pageID]/*,
-				left = {transform:"translateX(-185px)"},
-				center = {transform:"translateX(0px)", width: 200},
-				right = {transform:"translateX(185px)"}*/;
+			var direction = _this.currentPageID <= pageID
+			  //, oldPage = this.pages[pageID - 1]
+			  , page = this.pages[pageID]
+			  //, left = {transform:"translateX(-185px)"}
+			  //, center = {transform:"translateX(0px)", width: 200}
+			  //, right = {transform:"translateX(185px)"}
+			  , e
+			  ;
 
 			page.show(direction ? 1 : -1);
 			

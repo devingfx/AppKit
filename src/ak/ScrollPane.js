@@ -63,7 +63,7 @@ var ScrollPane = ak.ScrollPane = class ScrollPane extends Element {
 		console.html('<group level="instance" c="instance"><span c="icon instance">.</span>Class <span c="AppKit class">ScrollPane</span> inherits:</group>');
 		
 		this.Element();
-		this.implementStyle();
+		// this.implementStyle();
 		
 		
 		this._$pane = new Node('pane');

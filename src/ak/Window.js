@@ -20,6 +20,9 @@ var Window = ak.Window = class Window extends ak.NodeClass {
 		
 		// Select important nodes
 		this.$header = this.$('WebAppHeader')[0];
+
+		
+
 		// this.$navMenu = this.$header.find('#menuSlide');
 		// this.$settings = $('#settingsMenu');
 		this.$pageView = document.$('PageView')[0];
@@ -66,11 +69,17 @@ var Window = ak.Window = class Window extends ak.NodeClass {
 		console.html('<groupEnd level="instance"/>');
 	}
 	
+	createChildren()
+	{
+		this.rawChildren.insertBefore( new Node('header'), this.rawChildren.children[0] );
+	}
+
 	initialize()
 	{
 		if( this._initialized ) return this;
 		
 		super.initialize();
+		this.createChildren();
 		
 		// Fix body sizes
 		// $('body').css({height: 5000});

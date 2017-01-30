@@ -11,7 +11,9 @@
 		   xmlns:local="*"
 		   
 		   id="app" version="0.5.1">
-	
+	<!--<jx:core:UIComponent>-->
+		<!--<local:libs:versions id="version"/>-->
+	<!--</jx:core:UIComponent>-->
 	<!--<ak:title>loading ...</ak:title>-->
 	
 	<!-- ChromeOS util: opening from Files app reloads the page but with http://localhost -->
@@ -79,8 +81,9 @@
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
 	
 	<!--<script src="http://ns.devingfx.com/jxml/2015/namespace.js"></script>-->
-	<!--<script src="https://devingfx.github.io/Jilex/dist/jilex-classes.src.js"-->
+	<!--<script src="https://devingfx.github.io/Jilex/core-classes.src.js"-->
 	<script src="http://localhost:8080/Downloads/dev/Jilex Framework/dist/jilex-classes.src.js"
+			id="Jilex"
 			debug="true" 
 			loadHttpNs="false"
 			recreateQNodes="false"
@@ -138,6 +141,8 @@
 	<!--	}-->
 	<!--</style>-->
 	<style>
+		@namespace ak url(ak.*);
+		
 		.icon { font-size: 34px; }
 		
 		Page {
@@ -157,25 +162,25 @@
 		/*		width: 25%;*/
 		/*		transform: translate(0);*/
 		/*	}*/
-			WebApp {
+			ak|Window {
 		/*		width: 75%;*/
 				left: 0;
 				right: 0;
 				width: auto;
 				transition: all 0.3s ease-out;
 			}
-				WebApp.leftMenuOpen {
+				ak|Window[class*=leftMenuOpen] {
 					left: 250px;
 					transform: none;
 				}
-				WebApp.rightMenuOpen {
+				ak|Window[class*=rightMenuOpen] {
 					right: 250px;
 					transform: none;
 				}
-		/*		WebApp.leftMenuOpen, WebApp.rightMenuOpen {*/
+		/*		ak|Window[class*=leftMenuOpen], ak|Window[class*=rightMenuOpen] {*/
 		/*			transform: translateX(0);*/
 		/*		}*/
-					WebApp.leftMenuOpen:after, WebApp.rightMenuOpen:after {
+					ak|Window[class*=leftMenuOpen]:after, ak|Window[class*=rightMenuOpen]:after {
 						pointer-events: none;
 						opacity: 0;
 					}

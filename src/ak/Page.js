@@ -62,23 +62,32 @@ var Page = ak.Page = class Page extends ak.ScrollPane {
 		if (this._$parent.$('Page').length)
 		{
 			// Get the current shown page(s)
-			var $old = this._$parent.$('Page:visible').filter( page => page != this.$el );
-			//.filter(":visible")			
-			var _this = this;
+			var $old = this._$parent.currentPage;
 			
-			var styleName = /*$('WebApp')[0].cssPrefix +*/ 'transform';
-			this.$el.hide().css(styleName, 'translateX(' + (100 * direction) + '%)').show().css('visibility', 'visible');
-			this.$el.scrollTop(this.$el.attr('scroll'));
-			$old.attr('scroll', $old.scrollTop());
-			setTimeout(function() {
-				_this.$el.css(styleName, 'translateX(0)');
-				$old.css(styleName, 'translateX(' + (-100 * direction) + '%)');
+			// var styleName = /*$('WebApp')[0].cssPrefix +*/ 'transform';
+			this.style.transfom = 'translateX(' + (100 * direction) + '%)';
+			this.style.display = 'block';
+			this.style.visibility = 'visible';
+			// this.$el.hide().css(styleName, 'translateX(' + (100 * direction) + '%)').show().css('visibility', 'visible');
+			this.scrollTop = Number(this.getAttribute('scroll'));
+			// this.$el.scrollTop(this.$el.attr('scroll'));
+			$old && $old.setAttribute('scroll', $old.scrollTop);
+			// $old.attr('scroll', $old.scrollTop());
+			setTimeout(() =>{
+				this.style.transform = 'translateX(0)';
+				// _this.$el.css(styleName, 'translateX(0)');
+				$old && ($old.style.transform = 'translateX(' + (-100 * direction) + '%)');
+				// $old.css(styleName, 'translateX(' + (-100 * direction) + '%)');
 			}, 10);
 			
 			// Can't use .one() here because it remove the handler only if each event are fired
-			$old.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend', function() {
+			// $old.on('transitionend webkitTransitionEnd oTransitionEnd otransitionend', function() {
+			$old && $old.addEventListener('transitionend', function onEnd() {
 				// $old.off('transitionend webkitTransitionEnd oTransitionEnd otransitionend').hide();
-				$old.off('transitionend webkitTransitionEnd oTransitionEnd otransitionend').css('visibility', 'hidden');
+				$old.removeEventListener( 'transitionend', onEnd );
+				// $old.off('transitionend webkitTransitionEnd oTransitionEnd otransitionend')
+				// 	.css('visibility', 'hidden');
+				$old.style.visibility = 'hidden';
 			});
 
 		}

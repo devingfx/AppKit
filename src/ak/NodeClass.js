@@ -16,7 +16,7 @@ var NodeClass = ak.NodeClass = class NodeClass extends jx.core.UIComponent {
 		// this._super();
 		this.Element();
 		
-		this.implementStyle();
+		// this.implementStyle();
 		
 // 		this.$el = $(this);
 		this._target = this;
